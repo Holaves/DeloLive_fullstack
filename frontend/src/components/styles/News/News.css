@@ -1,0 +1,23 @@
+.News {
+  margin-top: 1480px;
+}
+@media (max-width: 1000px) {
+  .News {
+    margin-top: 1354px;
+  }
+}
+@media (max-width: 768px) {
+  .News {
+    margin-top: 1450px;
+  }
+}
+@media (max-width: 480px) {
+  .News {
+    margin-top: 1450px;
+  }
+}
+@media (max-width: 320px) {
+  .News {
+    margin-top: 1450px;
+  }
+}/*# sourceMappingURL=News.css.map */

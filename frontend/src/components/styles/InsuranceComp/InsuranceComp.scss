@@ -1,0 +1,12 @@
+.InsuranceComp{
+    margin-top: 110px;
+}
+.programms{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    @media(max-width:980px){
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}

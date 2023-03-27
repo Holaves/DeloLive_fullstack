@@ -1,0 +1,114 @@
+.AboutUs{
+    margin-top: 138px;
+    overflow: hidden;
+    &__content{
+        box-shadow: inset 0px 2px 18px rgba(41, 41, 41, 0.1);
+        border-radius: 10px;
+        margin-top: 59px;
+        &__head{
+            padding:0px 100px ;
+            padding-top: 67px;
+            &__wrapper{
+                display: flex;
+                justify-content: space-between;
+                &__block{
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+            }
+        }
+        &__foot{
+            padding-top: 130px;
+            padding-bottom: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 auto;
+            max-width: 720px;
+            width: 100%;
+            &__img-cont{
+                height: 28px;
+                width: 100px;
+                background-size: cover;
+
+                margin-left: 44px;
+                &:first-child{
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+}
+.AboutUs__content__head__wrapper__block__text{
+    font-family: 'SF Pro Display';
+    font-weight: 400;
+    font-size: 55px;
+    line-height: 76px;
+    text-transform: uppercase;
+    color: #0D1C41;
+}
+.AboutUs__content__head__wrapper__block__subtext{
+    font-family: 'SF Pro Display';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    text-transform: uppercase;
+    color: #4A607A;
+    max-width: 200px;
+    margin-top: 20px;
+}
+.littleText{
+    font-family: 'SF Pro Display';
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 19px;
+    text-transform: uppercase;
+    color: #0D1C41;
+}
+
+
+#block-cav1::before{
+    content: attr(data-psevdotext);
+    font-size: 25px;
+    position: absolute;
+    top: 15px;
+    left: -24px;
+    height: 1px;
+}
+#block-cav::before{
+    content: attr(data-psevdotext);
+    font-size: 25px;
+    position: absolute;
+    left: 30px;
+    top: 15px;
+    height: 1px;
+}
+#block-tilda::before{
+    content: attr(data-psevdotext);
+    font-size: 35px;
+    height: 1px;
+    position: absolute;
+    left: 30px;
+    top: 15px;
+}
+
+#foot-image1{
+    width: 52px;
+    background: url(../../../assets/images/Main-images/aszh.svg) no-repeat center center / cover }
+#foot-image2{
+    width: 44px;
+    background: url(../../../assets/images/Main-images/vss_logo.svg) no-repeat center center / cover }
+#foot-image3{
+    width: 118px;
+    background: url(../../../assets/images/Main-images/swissre.svg) no-repeat center center / cover }
+#foot-image4{
+    width: 80px;
+    background: url(../../../assets/images/Main-images/RNRC.svg) no-repeat center center / cover }
+#foot-image5{ 
+    width: 112px;
+    background: url(../../../assets/images/Main-images/raex_logo.svg) no-repeat center center / cover }
+#foot-image6{
+    width: 84px;
+    background: url(../../../assets/images/Main-images/reyting_logo.svg) no-repeat center center / cover }

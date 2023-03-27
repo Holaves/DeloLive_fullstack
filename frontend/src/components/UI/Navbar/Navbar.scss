@@ -1,0 +1,160 @@
+// Var
+$fontBlack: #000000;
+
+//////////////////////////////////// 
+
+
+.Navbar{
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    &__wrapper{
+        padding: 0px 40px;
+        max-width: 1160px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .logo{
+            background: url(../../../assets/images/UI-images/Navbar-images/Logo.svg) no-repeat center center / cover;
+            width: 52px;
+            height: 58px;
+        }
+    }
+}
+
+//////////////////////////////////// 
+
+.Navlist-Telephone{
+    @media(max-width: 1000px){
+        display: none;
+    }
+    display: flex;
+    align-items: center;
+    
+    &__list{
+        display: flex;
+        align-items: center;
+        list-style: none;
+        &__item{
+            @media(max-width:1030px){
+                margin-right: 40px;
+            }
+            cursor: pointer;
+            font-family: 'SF Pro Display';
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 21px;
+            color: $fontBlack;
+
+            margin-right: 59px;
+            &:last-child{
+                margin-right: 0;
+            }
+        }
+        &__item_open{
+            cursor: pointer;
+            margin-right: 37px;
+            display: flex;
+            align-items: center;
+            &:last-child{
+                margin-right: 0;
+            }
+            &__text{
+                font-family: 'SF Pro Display';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 21px;
+                
+                color: $fontBlack;
+            }
+            &__openIcon{
+                display: inline;
+                background: url(../../../assets/images/UI-images/Navbar-images/OpenIcon.svg) no-repeat center center / cover;
+                width: 12px;
+                height: 8px;
+                position: relative;
+                top: 3px;
+                margin-left: 10px;
+            }
+        }
+    }
+    .Telephone{
+        @media(max-width:1070px){
+            font-size: 20px;
+        }
+        font-family: 'SF Pro Display';
+        font-style: normal;
+        font-weight: 200;
+        font-size: 24px;
+        line-height: 29px;
+
+        color: $fontBlack;
+        margin-left: 36px;
+
+    }
+}
+#City-nav{
+    font-weight: 500;
+}
+
+
+//////////////////////////////////// 
+
+
+.Personal-nav{
+    @media(max-width: 1000px){
+        display: none;
+    }
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    h5{
+        font-family: 'SF Pro Display';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 21px;
+        white-space: nowrap;
+        
+        color: #193554;
+        
+    }
+    &__icon{
+        background: url(../../../assets/images/UI-images/Navbar-images/Account-icon.svg) no-repeat center center / cover;
+        width: 28px;
+        height: 28px;
+
+        margin-left: 14px;
+    }
+}
+
+
+.Burger-button{
+    display: none;
+    @media(max-width:1000px){
+        display: block;
+    }
+    cursor: pointer;
+    &__el{
+        transition: all 0.1s ease;
+        margin-top: 13px;
+        &:first-child{
+            margin-top: 0;
+        }
+        width: 40px;
+        background-color: #0D1C41;
+        height: 2px;
+    }
+}
+
+.Burger-button__el_active{
+    width: 30px;
+    background-color: #0D1C41;
+    height: 2px;
+    margin-top: 13px;
+    transition: all 0.1s ease;
+    cursor: pointer;
+}

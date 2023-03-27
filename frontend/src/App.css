@@ -1,0 +1,17 @@
+*,::before,::after{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+._container-1{
+    max-width: 1260px;
+    width: 100%;
+    padding: 0px 20px;
+    margin: 0px auto;
+    
+}
+@media(max-width: 1440px){
+    ._container-1{
+        max-width: 1180px;
+    }
+}

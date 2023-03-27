@@ -1,0 +1,116 @@
+.SpeciesInsurance {
+  margin-top: 133px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+@media (max-width: 1162px) {
+  .SpeciesInsurance {
+    flex-direction: column;
+    justify-content: initial;
+  }
+}
+
+.ImagesTargetBlocks {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+@media (max-width: 1162px) {
+  .ImagesTargetBlocks {
+    margin-top: 59px;
+  }
+}
+.ImagesTargetBlocks__block {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+@media (max-width: 1162px) {
+  .ImagesTargetBlocks__block {
+    margin-top: 59px;
+    flex: 1 1 50%;
+  }
+}
+.ImagesTargetBlocks__block:hover > h4 {
+  font-family: "SF Pro Display";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  transition: all 0.4s;
+  max-width: 175px;
+  color: #0D1C41;
+}
+.ImagesTargetBlocks__block__text {
+  font-family: "SF Pro Display";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  transition: all 0.4s;
+  max-width: 175px;
+  color: #4A607A;
+  text-align: right;
+  margin-right: 25px;
+  margin-left: 0px;
+}
+.ImagesTargetBlocks__block:hover > div > div {
+  width: 181px;
+  height: 181px;
+  border: 1px solid #A89060;
+  box-shadow: -2px 7px 18px -5px rgba(48, 45, 38, 0.3);
+  border-radius: 10px;
+  transition: all 0.3s;
+}
+.ImagesTargetBlocks__block:hover > div > div > div {
+  filter: invert(59%) sepia(44%) saturate(353%) hue-rotate(2deg) brightness(90%) contrast(84%);
+  transition: all 0.3s;
+}
+.ImagesTargetBlocks__block__icon-block {
+  width: 181px;
+  height: 181px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ImagesTargetBlocks__block__icon-block__icon-wrapper {
+  box-shadow: 0px 2px 18px rgba(41, 41, 41, 0.1);
+  border-radius: 10px;
+  height: 165px;
+  width: 165px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+.ImagesTargetBlocks__block__icon-block__icon-wrapper__icon {
+  height: 104px;
+  width: 104px;
+  transition: all 0.3s;
+  filter: invert(0%) sepia(1000%) saturate(50%) hue-rotate(145deg) brightness(100%) contrast(100%);
+}
+
+#targetBlocks_1 {
+  background: url(../../../assets/images/Main-images/angel1.png) no-repeat center center/cover;
+}
+
+#targetBlocks_2 {
+  background: url(../../../assets/images/Main-images/accident.png) no-repeat center center/cover;
+}
+
+#targetBlocks_3 {
+  background: url(../../../assets/images/Main-images/healthcare.png) no-repeat center center/cover;
+}
+
+#targetBlocks_4 {
+  background: url(../../../assets/images/Main-images/hendManney.svg) no-repeat center center/cover;
+}
+
+.block-revers {
+  flex-direction: row-reverse;
+}
+.block-revers > h4 {
+  text-align: left;
+  margin-left: 25px;
+  margin-right: 0px;
+}/*# sourceMappingURL=SpeciesInsurance.css.map */

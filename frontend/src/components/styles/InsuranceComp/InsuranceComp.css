@@ -1,0 +1,15 @@
+.InsuranceComp {
+  margin-top: 110px;
+}
+
+.programms {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+@media (max-width: 980px) {
+  .programms {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}/*# sourceMappingURL=InsuranceComp.css.map */
