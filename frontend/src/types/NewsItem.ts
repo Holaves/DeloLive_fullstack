@@ -1,8 +1,8 @@
 
 type NewsItemType = {
-    id: number;
+    id: any;
     date: string;
-    imageURL: string;
+    image: string;
     description: string;
     subDescription?: [string, string?, string?];
 }

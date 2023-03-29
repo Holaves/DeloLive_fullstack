@@ -1,0 +1,14 @@
+.subDescription{
+    border-radius: 25px;
+    border: 1px solid #DDD0A4;
+    margin-left: 10px;
+    &__content{
+        font-family: 'SF Pro Display';
+        font-weight: 400;
+        font-size: 14px;
+        text-transform: uppercase;
+        color: #0D1C41;
+        
+        padding: 10px 15px;
+    }
+}

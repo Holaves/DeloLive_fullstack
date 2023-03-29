@@ -11,11 +11,15 @@ import { NewsItemInterface } from '../types/interfaces';
 const News = () => {
     const windowWidth = useSelector(selectWidth) as number
     const [NewsList, setNewsList] = useState <NewsItemType[]>([])
+
     
     useEffect(() => {
+
         fetch('/api/news')
         .then(response => response.json())
         .then(response => setNewsList(response))
+        .then(response => console.log(NewsList))
+
     }, [])
 
     return (

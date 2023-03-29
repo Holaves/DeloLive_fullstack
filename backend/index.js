@@ -1,39 +1,32 @@
-const express = require('express')
+import express from 'express'
+import mongoose from 'mongoose'
+import NewsRouter from './NewsRouter.js'
+import fileUpload from 'express-fileupload'
+
+
+const DB_URL = `mongodb+srv://Holaves:Good55555@delolivecluster.r6alzjc.mongodb.net/?retryWrites=true&w=majority`
 
 const PORT = process.env.PORT || 4000
 
 const app = express()
 
-app.listen(PORT, () => {
-    console.log(`Server starting on port - ${PORT}`)
-})
-const date = new Date()
+app.use(express.json())
+app.use(express.static('backend/static'))
+app.use(fileUpload({}))
+app.use('/api', NewsRouter)
 
-const dd = String(date.getDate()).padStart(2, '0')
-const mm = String(date.getMonth() + 1).padStart(2, '0')
-const yyyy = date.getFullYear()
-const NowDate = mm + '-' + dd + '-' + yyyy
+const startServer = async () => {
+    try{
+        await mongoose.connect(DB_URL, {useUnifiedTopology: true, useNewUrlParser: true})
+        app.listen(PORT, () => console.log(`Server starting on port - ${PORT}`))
+    } catch(e){
+        console.log(e)
+    }
+}
+
+startServer()
+
+// 
 
 
-app.get('/api/news', (req, res) => {
-    res.json([
-        {
-            id: 1,
-            date: NowDate,
-            imageUrl: 'http://',
-            description: 'Описание карточки новости1'
-        },
-        {
-            id: 2,
-            date: NowDate,
-            imageUrl: 'http://',
-            description: 'Описание карточки новости2'
-        },
-        {
-            id: 3,
-            date: NowDate,
-            imageUrl: 'http://',
-            description: 'Описание карточки новости3'
-        },
-    ])
-})
+

@@ -3,13 +3,23 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "startServ": "node backend/index.js"
+    "devServ": "nodemon ./backend/index.js",
+    "startServ": "node ./backend/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
+    "mongoose": "^7.0.3",
+    "mysql": "^2.18.1",
+    "path": "^0.12.7",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }
