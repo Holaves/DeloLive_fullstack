@@ -1,1 +1,1 @@
-{"version":3,"sources":["News.scss","News.css"],"names":[],"mappings":"AAAA;EACI,kBAAA;ACCJ;ADAI;EAFJ;IAGQ,kBAAA;ECGN;AACF;ADFI;EALJ;IAMQ,kBAAA;ECKN;AACF;ADJI;EARJ;IASQ,kBAAA;ECON;AACF;ADNI;EAXJ;IAYQ,kBAAA;ECSN;AACF","file":"News.css"}
+{"version":3,"sources":["News.scss","News.css"],"names":[],"mappings":"AAAA;EACI,kBAAA;ACCJ;ADAI;EAFJ;IAGQ,kBAAA;ECGN;AACF;ADFI;EALJ;IAMQ,iBAAA;ECKN;AACF","file":"News.css"}

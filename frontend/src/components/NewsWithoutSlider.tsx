@@ -1,25 +1,33 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import NewsItem from './NewsItem';
 import NewsItemType from '../types/NewsItem';
 import './styles/NewsWithoutSlider/NewsWithoutSlider.css'
 import Title from './UI/Title/Title';
 import Button, { ButtonBorderVariant, ButtonTextVariant } from './UI/Button/Button';
-
+import axiosRequests from '../classes/axiosRequests';
 
 interface NewsWithoutSliderProps{
     NewsList: NewsItemType[];
 }
 
 const NewsWithoutSlider: FC<NewsWithoutSliderProps> = ({NewsList}) => {
+    const [fullNewsList, setFullNewsList] = useState <NewsItemType[]>([])
+    
+    useEffect(() => {
+        axiosRequests.GET('/api/news')
+        .then(response => setFullNewsList(response))
+        .catch(e => console.log(e))
+    }, [])
+
     return (
         <div className='NewsWithoutSlider'>
             <div className="NewsList">
                 {
                     NewsList.length !== 0 ?
-                    NewsList.map((item: NewsItemType) =>
+                    NewsList.map((item: NewsItemType, index: number) =>
                     <NewsItem
-                    id={item.id}
-                    key={item.id}
+                    _id={item._id}
+                    key={index + 1}
                     date={item.date}
                     description={item.description}
                     image={item.image}
@@ -32,7 +40,7 @@ const NewsWithoutSlider: FC<NewsWithoutSliderProps> = ({NewsList}) => {
                 }
             </div>
             {
-                NewsList.length > 3 ?
+                fullNewsList.length > 3 ?
                 <div className="buttonCont">
                     <Button
                         text='Смотреть все  -->'

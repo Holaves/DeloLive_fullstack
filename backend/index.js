@@ -1,6 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import NewsRouter from './NewsRouter.js'
+import NewsRouter from './Routers/NewsRouter.js'
+import OffersRouter from './Routers/OffersRouter.js'
 import fileUpload from 'express-fileupload'
 
 
@@ -14,6 +15,7 @@ app.use(express.json())
 app.use(express.static('backend/static'))
 app.use(fileUpload({}))
 app.use('/api', NewsRouter)
+app.use('/api', OffersRouter)
 
 const startServer = async () => {
     try{

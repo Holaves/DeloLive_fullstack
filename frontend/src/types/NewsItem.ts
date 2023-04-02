@@ -1,6 +1,6 @@
 
 type NewsItemType = {
-    id: any;
+    _id: any;
     date: string;
     image: string;
     description: string;

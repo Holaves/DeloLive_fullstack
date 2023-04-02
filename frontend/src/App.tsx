@@ -6,10 +6,12 @@ import { useDispatch } from 'react-redux';
 import { resize } from './components/globalSlices/windowWidthSlice';
 import { scrolling } from './components/globalSlices/scroll';
 import { useEffect } from 'react';
+import Footer from './components/UI/Footer/Footer';
 
 function App() {
   const dispatch = useDispatch();
 
+  
   useEffect(() => {
     dispatch(resize())
   })
@@ -25,6 +27,7 @@ function App() {
     <div>
       <Navbar/>
       <Main/>
+      <Footer/>
     </div>
   );
 }

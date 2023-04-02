@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    value: <number>0,
+    value: 0,
     status: 'idle',
 };
 
@@ -10,7 +10,7 @@ export const scrollSlice = createSlice({
     initialState,
     reducers: {
         scrolling: (state) => {
-            state.value = <number>window.pageYOffset
+            state.value = window.pageYOffset as number
         }
     }
 })

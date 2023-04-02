@@ -1,0 +1,23 @@
+.SpecialOffers{
+    margin-top: 1450px;
+}
+.NoNews{
+    border: 1px solid black;
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Swiper-wrapper{
+    position: relative;
+    &::before{
+        content: '';
+        height: 23px;
+        width: 23px;
+        background: url(../../../assets/images/Main-images/moveTouch.svg);
+        position: absolute;
+        top: -36px;
+        right: 22px;
+    }
+}

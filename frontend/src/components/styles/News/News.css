@@ -8,16 +8,6 @@
 }
 @media (max-width: 768px) {
   .News {
-    margin-top: 1450px;
-  }
-}
-@media (max-width: 480px) {
-  .News {
-    margin-top: 1450px;
-  }
-}
-@media (max-width: 320px) {
-  .News {
-    margin-top: 1450px;
+    margin-top: 110px;
   }
 }/*# sourceMappingURL=News.css.map */

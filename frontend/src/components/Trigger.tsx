@@ -67,7 +67,8 @@ const Trigger: FC<TriggerProps> = ({imgPath, title, buttonText, buttonTextTwo, t
                         variantText={isHover ? ButtonTextVariant.dirty : ButtonTextVariant.black}
                         />
                     </div>
-                    : () => {}
+                    :
+                    <div></div>
                     }
                 </>
             </div>

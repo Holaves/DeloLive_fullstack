@@ -6,20 +6,16 @@ import NewsWithoutSlider from './NewsWithoutSlider';
 import './styles/News/News.css'
 import Title from './UI/Title/Title';
 import NewsItemType from '../types/NewsItem';
-import { NewsItemInterface } from '../types/interfaces';
+import axiosRequests from '../classes/axiosRequests';
 
 const News = () => {
     const windowWidth = useSelector(selectWidth) as number
     const [NewsList, setNewsList] = useState <NewsItemType[]>([])
 
-    
     useEffect(() => {
-
-        fetch('/api/news')
-        .then(response => response.json())
+        axiosRequests.GET('/api/news')
         .then(response => setNewsList(response))
-        .then(response => console.log(NewsList))
-
+        .catch(e => console.log(e))
     }, [])
 
     return (
@@ -28,7 +24,7 @@ const News = () => {
             {
                 windowWidth > 1000 ?
                 <NewsWithoutSlider NewsList={NewsList.slice(0, 3)} /> :
-                <NewsSlider/>
+                <NewsSlider NewsList={NewsList}/>
             } 
         </div>
     );

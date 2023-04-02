@@ -5,14 +5,25 @@ import SubDescriptionEl from './UI/subDescription/SubDescriptionEl';
 
 
 const NewsItem:FC<NewsItemType> = ({date, description, image, subDescription}) => {
-    const [descriptionFullD, setDescriptionFullD] = useState <string>('')
+    const [isHover, setIsHover] = useState <boolean>(false)
+
+    const mouseOverHandler = (e: React.MouseEvent<HTMLDivElement>) => {
+        setIsHover(true)
+    }
+    const mouseOutHandler = (e: React.MouseEvent<HTMLDivElement>) => {
+        setIsHover(false)
+    }
 
     function truncate(str: string, n: number): string{
         return (str.length > n) ? str.slice(0, n-1) + '...' : str;
     };
    
     return (
-        <div className='NewsItem'>
+        <div
+        className={isHover ? 'NewsItemDirty' : 'NewsItem'}
+        onMouseOver={mouseOverHandler}
+        onMouseOut={mouseOutHandler}
+        >
             <div className="imgCont">
                 <img src={image ? image : 'https://pp.userapi.com/c628323/v628323673/38028/ecnXaFJgXik.jpg'} alt="" />
             </div>

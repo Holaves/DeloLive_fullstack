@@ -1,5 +1,5 @@
 .Button{
-    
+    cursor: pointer;
 }
 
 
@@ -26,6 +26,8 @@
 }
 .dirtyText{
     font-family: 'SF Pro Display';
+    position: relative;
+    top: 3px;
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
@@ -38,6 +40,8 @@
     font-family: 'SF Pro Display';
     font-weight: 400;
     font-size: 16px;
+    position: relative;
+    top: 3px;
     line-height: 19px;
     text-transform: uppercase;
     color: #0D1C41; 

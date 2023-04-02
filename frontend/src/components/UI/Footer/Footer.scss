@@ -1,0 +1,178 @@
+.Footer{
+    background: #4A607A;
+    margin-top: 140px;
+}
+.routeAndContact{
+    padding-top: 84px;
+}
+.navigationBar{
+    ul{
+        list-style: none;
+        margin-bottom: 0;
+        li{
+            display: inline-block;
+            cursor: pointer;
+            margin-top: 32px;
+            &:first-child{
+                margin-top: 0;
+                @media(max-width:410px){
+                    margin-top: 32px;
+                }
+            }
+            font-family: 'SF Pro Display';
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 21px;
+            color: #FFFFFF;
+            transition: all 0.4s;
+            position: relative; 
+            &:hover{
+                transition: all 0.4s;
+                color: #DDD0A4;
+            }
+            &::after{ 
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                height: 1px;
+                background-color: #DDD0A4;
+                transition: all 0.4s;
+                transform: scaleX(0); 
+                transform-origin: left;
+            }
+            &:hover::after{ 
+                transform: scaleX(1);
+            }
+        }
+    }
+}
+.darkText{
+    font-family: 'SF Pro Display';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    color: #939CA6;
+    @media(max-width:410px){
+        text-align: center;
+    }
+}
+.Time{
+    margin-top: 42px;
+}
+.telephone{
+    font-family: 'SF Pro Display';
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: #FFFFFF;
+    margin-top: 42px;
+}
+.email{
+    margin-top: 42px;
+    h4{
+        text-decoration: none;
+        font-family: 'SF Pro Display';
+        font-weight: 400;
+        font-size: 18px;
+        color: #FFFFFF;
+    }
+    a{
+        text-decoration: none;
+        display: inline-block;
+        font-family: 'SF Pro Display';
+        font-weight: 800;
+        margin-top: 3px;
+        font-size: 18px;
+        color: #FFFFFF;
+        border-bottom: 1px solid #FFFFFF;
+        &:hover{
+            color: #FFFFFF;
+        }
+    }
+}
+.addresTime{
+    @media(max-width: 698px){
+        margin-top: 85px;
+    }
+    @media(max-width: 560px){
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+.contacts{
+    @media(max-width: 942px){
+        margin-top: 85px;
+    }
+    @media(max-width: 560px){
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+}
+.otherContacts{
+    display: flex;
+    align-items: center;
+    margin-top: 56px;
+    &__icon{
+        height: 40px;
+        width: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #FFFFFF;
+        border-radius: 100%;
+        margin-left: 20px;
+        cursor: pointer;
+        &:first-child{
+            margin-left: 0;
+        }
+    }
+}
+.vk{
+    div{
+        width: 20px;
+        height: 12px;
+        background: url(../../../assets/images/UI-images/Footer-images/Vk.svg) no-repeat center center / cover;
+    }
+}
+.tg{
+    div{
+        width: 20px;
+        height: 17px;
+        background: url(../../../assets/images/UI-images/Footer-images/Telegramm.svg);
+    }
+}
+.facebook{
+    div{
+        width: 17px;
+        height: 17px;
+        background: url(../../../assets/images/UI-images/Footer-images/Facebook.svg);
+    }
+}
+.inst{
+    div{
+        width: 17px;
+        height: 17px;
+        background: url(../../../assets/images/UI-images/Footer-images/Inst.svg);
+    }
+}
+.line{
+    margin-top: 62px;
+    border: 1px solid #939CA6;
+    width: 100%;
+}
+.subFooter{
+    font-family: 'SF Pro Display';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #939CA6;
+
+    margin-top: 35px;
+    padding-bottom: 39px;
+}

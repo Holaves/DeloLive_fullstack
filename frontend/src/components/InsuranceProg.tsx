@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { propsTextObj } from './InsuranceComp';
 import './styles/InsuranceProg/InsuranceProg.css'
 import Button, { ButtonBorderVariant, ButtonTextVariant } from './UI/Button/Button';

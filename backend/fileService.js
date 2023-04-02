@@ -1,6 +1,6 @@
 import * as uuid from 'uuid';
 import * as path from 'path';
-import * as fileUpload from 'express-fileupload'
+// import * as fileUpload from 'express-fileupload'
 
 class FileService {
     saveFile(file) {
