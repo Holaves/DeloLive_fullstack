@@ -14,9 +14,9 @@ import UsefulButtons from '../components/UsefulButtons';
 const Main = () => {
     let windowWidth = useSelector(selectWidth)
     const [offersList, setOffersList] = useState <OfferItemType[]>([])
-
+   
     useEffect(() => {
-        axiosRequests.GET('/api/offers')
+        axiosRequests.GET<OfferItemType>('/api/offers')
         .then(response => setOffersList(response))
         .catch(e => console.log(e))
     }, [])

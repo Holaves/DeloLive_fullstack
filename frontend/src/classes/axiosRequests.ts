@@ -1,5 +1,4 @@
 import axios from "axios"
-import NewsItemType from "../types/NewsItem"
 
 interface bodyPost{
     description: string;
@@ -7,13 +6,13 @@ interface bodyPost{
 }
 
 class axiosReq{
-    async GET(url: string): Promise<NewsItemType[]> {
+    async GET <T>(url: string): Promise<T[]> {
         const resp = await axios.get(url)
-        return resp.data as NewsItemType[]
+        return resp.data as T[]
     }
-    async GetOne(url: string, id: string): Promise<NewsItemType>{
+    async GetOne <T>(url: string, id: string): Promise<T>{
         const resp = await axios.get(url + '/' + id)
-        return resp.data as NewsItemType
+        return resp.data as T
     }
     async POST(url: string, body: bodyPost, imageFile: File){
         const formData = new FormData();

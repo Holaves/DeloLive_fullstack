@@ -1,16 +1,14 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import './styles/SpecialOffers/SpecialOffers.css'
 import OfferItemType from '../types/OfferItem';
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Scrollbar } from 'swiper';
-import 'swiper/swiper.css'
 import 'swiper/css/scrollbar'
 import './styles/NewsSlider/NewsSlider.css'
 import { useSelector } from 'react-redux';
 import { selectWidth } from './globalSlices/windowWidthSlice';
 import OffersItem from './OffersItem';
-import axiosRequests from '../classes/axiosRequests';
 import Title from './UI/Title/Title';
 
 interface SpecialOffersProps{
@@ -41,7 +39,7 @@ const SpecialOffers:FC<SpecialOffersProps> = ({offersList}) => {
                             <SwiperSlide>
                                 <OffersItem
                                     _id={item._id}
-                                    key={index + 1}
+                                    key={item._id}
                                     description={item.description}
                                     image={item.image}
                                 />

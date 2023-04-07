@@ -1,0 +1,32 @@
+.NewsListBS{
+    display: flex;
+    flex-wrap: wrap;
+    @media(max-width:1060px){
+        justify-content: center;
+    }
+    &__item{
+        flex: 1 1 33%;
+        @media(max-width:1060px){
+            flex: 0 1 33%;
+            &:nth-child(2n){
+                margin-left: 50px;
+            }
+        }
+        @media(max-width: 875px){
+            &:nth-child(2n){
+                margin-left: 20px;
+            }
+        }
+        @media(max-width: 800px){
+            &:nth-child(2n){
+                margin-left: 10px;
+            }
+        }
+        @media(max-width: 780){
+            &:nth-child(2n){
+                margin-left: 0px;
+            }
+            
+        }
+    }
+}

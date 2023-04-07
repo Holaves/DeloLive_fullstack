@@ -13,7 +13,7 @@ const News = () => {
     const [NewsList, setNewsList] = useState <NewsItemType[]>([])
 
     useEffect(() => {
-        axiosRequests.GET('/api/news')
+        axiosRequests.GET<NewsItemType>('/api/news')
         .then(response => setNewsList(response))
         .catch(e => console.log(e))
     }, [])
@@ -24,7 +24,7 @@ const News = () => {
             {
                 windowWidth > 1000 ?
                 <NewsWithoutSlider NewsList={NewsList.slice(0, 3)} /> :
-                <NewsSlider NewsList={NewsList}/>
+                <NewsSlider NewsList={NewsList.slice(0, 30)}/>
             } 
         </div>
     );

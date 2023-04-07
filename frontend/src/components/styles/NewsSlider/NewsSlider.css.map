@@ -1,1 +1,1 @@
-{"version":3,"sources":["NewsSlider.scss","NewsSlider.css"],"names":[],"mappings":"AAAA;EACI,uBAAA;EACA,WAAA;EACA,aAAA;EACA,aAAA;EACA,mBAAA;EACA,uBAAA;ACCJ;;ADCA;EACI,kBAAA;ACEJ;ADDI;EACI,WAAA;EACA,YAAA;EACA,WAAA;EACA,iEAAA;EACA,kBAAA;EACA,UAAA;EACA,WAAA;ACGR","file":"NewsSlider.css"}
+{"version":3,"sources":["NewsSlider.scss","NewsSlider.css"],"names":[],"mappings":"AACA;EACI,kBAAA;ACAJ;ADCI;EACI,WAAA;EACA,YAAA;EACA,WAAA;EACA,iEAAA;EACA,kBAAA;EACA,UAAA;EACA,WAAA;ACCR","file":"NewsSlider.css"}

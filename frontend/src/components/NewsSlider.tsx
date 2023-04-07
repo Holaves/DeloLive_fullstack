@@ -5,7 +5,6 @@ import Title from './UI/Title/Title';
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Scrollbar } from 'swiper';
-import 'swiper/swiper.css'
 import 'swiper/css/scrollbar'
 import './styles/NewsSlider/NewsSlider.css'
 import { useSelector } from 'react-redux';
@@ -33,11 +32,11 @@ const NewsSlider:FC<NewsSliderProps> = ({NewsList}) => {
             >
                 {
                     NewsList.length !== 0 ?
-                    NewsList.map((item: NewsItemType, index: number) => 
+                    NewsList.map((item: NewsItemType, index2: number) => 
                         <SwiperSlide>
                             <NewsItem
                                 _id={item._id}
-                                key={index + 1}
+                                key={index2 + 1}
                                 date={item.date}
                                 description={item.description}
                                 image={item.image}

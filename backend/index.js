@@ -7,7 +7,7 @@ import fileUpload from 'express-fileupload'
 
 const DB_URL = `mongodb+srv://Holaves:Good55555@delolivecluster.r6alzjc.mongodb.net/?retryWrites=true&w=majority`
 
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 5000
 
 const app = express()
 

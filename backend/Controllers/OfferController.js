@@ -20,7 +20,7 @@ class OfferController{
     }
     async getOne(req, res) {
         try {
-            const offer = await OfferService.getOne(req.params.id)
+            const offerDB = await OfferService.getOne(req.params.id)
             return res.json(offer)
         } catch (e) {
             res.status(500).json(e)

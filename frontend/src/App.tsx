@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'swiper/swiper.css'
 import Navbar from './components/UI/Navbar/Navbar';
 import Main from './pages/Main';
 import { useDispatch } from 'react-redux';
@@ -7,10 +9,28 @@ import { resize } from './components/globalSlices/windowWidthSlice';
 import { scrolling } from './components/globalSlices/scroll';
 import { useEffect } from 'react';
 import Footer from './components/UI/Footer/Footer';
+import { 
+  createBrowserRouter, 
+  createRoutesFromElements,
+  Route,
+  Outlet,
+  RouterProvider
+ } from 'react-router-dom';
+import NewsPage, { NewsPageLoader } from './pages/NewsPage';
+import AccountPage from './pages/AccountPage';
 
 function App() {
-  const dispatch = useDispatch();
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<Root />}>
+        <Route index element={<Main/>} />
+        <Route path='/news' element={<NewsPage/>} loader={NewsPageLoader} />
+        <Route path='/account' element={<AccountPage/>}/>
+      </Route>
+    )
+  );
 
+  const dispatch = useDispatch();
   
   useEffect(() => {
     dispatch(resize())
@@ -24,12 +44,22 @@ function App() {
 }, true);
 
   return (
-    <div>
-      <Navbar/>
-      <Main/>
-      <Footer/>
+    <div className='App'>
+      <RouterProvider router={router}/>
     </div>
   );
+}
+
+const Root = () => {
+  return(
+    <>
+      <Navbar/>
+      <div>
+        <Outlet/>
+      </div>
+      <Footer/>
+    </>
+  )
 }
 
 export default App;

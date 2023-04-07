@@ -33,6 +33,7 @@
   list-style: none;
 }
 .Navlist-Telephone__list__item {
+  text-decoration: none;
   cursor: pointer;
   font-family: "SF Pro Display";
   font-weight: 400;
@@ -40,6 +41,9 @@
   line-height: 21px;
   color: #000000;
   margin-right: 59px;
+}
+.Navlist-Telephone__list__item:hover {
+  color: #000000;
 }
 @media (max-width: 1030px) {
   .Navlist-Telephone__list__item {
@@ -95,6 +99,7 @@
 }
 
 .Personal-nav {
+  text-decoration: none;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -109,7 +114,6 @@
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
-  line-height: 21px;
   white-space: nowrap;
   color: #193554;
 }

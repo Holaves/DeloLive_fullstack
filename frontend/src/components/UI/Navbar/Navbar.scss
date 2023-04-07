@@ -38,6 +38,10 @@ $fontBlack: #000000;
         align-items: center;
         list-style: none;
         &__item{
+            text-decoration: none;
+            &:hover{
+                color:$fontBlack;
+            }
             @media(max-width:1030px){
                 margin-right: 40px;
             }
@@ -105,6 +109,7 @@ $fontBlack: #000000;
 
 
 .Personal-nav{
+    text-decoration: none;
     @media(max-width: 1000px){
         display: none;
     }
@@ -116,7 +121,6 @@ $fontBlack: #000000;
         font-style: normal;
         font-weight: 400;
         font-size: 18px;
-        line-height: 21px;
         white-space: nowrap;
         
         color: #193554;

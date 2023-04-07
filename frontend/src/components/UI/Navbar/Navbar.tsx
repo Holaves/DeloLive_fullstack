@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Navbar.css'
 
 const Navbar = () => {
@@ -25,8 +26,8 @@ const Navbar = () => {
                 <div className="Navlist-Telephone">
                     
                     <ul className="Navlist-Telephone__list">
-                        <li className="Navlist-Telephone__list__item">Главная</li>
-                        <li className="Navlist-Telephone__list__item">О нас</li>
+                        <li className="Navlist-Telephone__list__item"><Link to="/" className='Navlist-Telephone__list__item'>Главная</Link></li>
+                        <li className="Navlist-Telephone__list__item"><Link to="/aboutUs" className='Navlist-Telephone__list__item'>О нас</Link></li>
                         <li className='Navlist-Telephone__list__item_open' onClick={() => {}}>
                             <h4 className="Navlist-Telephone__list__item_open__text">Помощь</h4>
                             <div className="Navlist-Telephone__list__item_open__openIcon"></div>
@@ -39,10 +40,10 @@ const Navbar = () => {
                     <h3 className="Telephone">+7 495 967 13 01</h3>
 
                 </div>
-                <div className="Personal-nav">
+                <Link className="Personal-nav" to='/account'>
                     <h5>Личный кабинет</h5>
                     <div className="Personal-nav__icon"></div>
-                </div>
+                </Link>
                 <div 
                     className="Burger-button"
                     onClick={BurgerMenuToggle}

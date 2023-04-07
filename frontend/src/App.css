@@ -4,14 +4,23 @@
     margin: 0;
 }
 ._container-1{
-    max-width: 1260px;
+    max-width: 1260px ;
     width: 100%;
     padding: 0px 20px;
     margin: 0px auto;
-    
 }
 @media(max-width: 1440px){
     ._container-1{
         max-width: 1180px;
     }
+}
+h1,h2,h3,h4,h5, ul{
+    margin-bottom: 0 !important;
+}
+.NoNews{
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
