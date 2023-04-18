@@ -30,7 +30,11 @@ $fontBlack: #000000;
 //////////////////////////////////// 
 
 .Navbar-dropdown{
-
+}
+.Navbar-dropdown_open{
+    max-height: 500;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
 }
 
 .Navlist-Telephone{
@@ -126,7 +130,7 @@ $fontBlack: #000000;
     font-weight: 500;
 }
 
-.Navbar-dropdown .dropdown-toggle{
+.dropdown-toggle{
     color: $fontBlack;
 }
 

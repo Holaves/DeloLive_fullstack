@@ -18,6 +18,12 @@
   height: 58px;
 }
 
+.Navbar-dropdown_open {
+  max-height: 500;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
 .Navlist-Telephone {
   display: flex;
   align-items: center;
@@ -112,7 +118,7 @@
   font-weight: 500;
 }
 
-.Navbar-dropdown .dropdown-toggle {
+.dropdown-toggle {
   color: #000000;
 }
 

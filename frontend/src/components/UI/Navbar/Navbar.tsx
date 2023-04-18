@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { Form, Link } from 'react-router-dom';
 import { NavItem, Nav, NavDropdown, FormControl } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -17,11 +17,16 @@ const Navbar = () => {
 
     const liRefhelp = useRef <HTMLDivElement>(null)
     const liRefcity = useRef <HTMLDivElement>(null)
+
     const onMouseEventHandler = (isName: nameDropdown) => {
         setIsHoverDropdown(isName)
     }
-
+    const getDropdownClassName = (dropdownName: nameDropdown): string => {
+        return isHoverDropdown === dropdownName ? 'Navbar-dropdown Navlist-Telephone__list__item_open' : 'Navbar-dropdown_open Navlist-Telephone__list__item_open'
+    }
+    
     useEffect(() => {
+        getDropdownClassName("")
         const url = "https://api.hh.ru/areas"
         axiosRequests.GET(url)
         .then(response => setCities(response))
@@ -44,10 +49,10 @@ const Navbar = () => {
                         </LinkContainer>
 
                         <NavDropdown
-                            title="Помощь"
+                            title={"Помощь"}
                             style={{color: "red"}}
                             ref={liRefhelp}
-                            className='Navbar-dropdown Navlist-Telephone__list__item_open'
+                            className={getDropdownClassName('help')}
                             id="basic-nav-dropdown"
                         >
                             <NavDropdown.Item>Итем1</NavDropdown.Item>
@@ -62,7 +67,7 @@ const Navbar = () => {
                             ref={liRefcity}
                             onMouseEnter={() => onMouseEventHandler("city")} 
                             onMouseLeave={() => onMouseEventHandler("city")} 
-                            className='Navbar-dropdown Navlist-Telephone__list__item_open'
+                            className={getDropdownClassName('city')}
                             id="basic-nav-dropdown"
                         >
                             <Form>
