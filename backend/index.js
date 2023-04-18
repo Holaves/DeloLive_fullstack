@@ -19,8 +19,9 @@ app.use('/api', OffersRouter)
 
 const startServer = async () => {
     try{
-        await mongoose.connect(DB_URL, {useUnifiedTopology: true, useNewUrlParser: true})
         app.listen(PORT, () => console.log(`Server starting on port - ${PORT}`))
+        await mongoose.connect(DB_URL, {useUnifiedTopology: true, useNewUrlParser: true})
+        console.log('DB connect')
     } catch(e){
         console.log(e)
     }

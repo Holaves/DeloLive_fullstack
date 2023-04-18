@@ -1,6 +1,7 @@
 import React from 'react';
 import './Footer.css'
 import Button, { ButtonBorderVariant, ButtonTextVariant } from '../Button/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Row } from 'react-bootstrap';
 
 const Footer = () => {

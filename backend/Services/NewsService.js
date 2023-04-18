@@ -1,5 +1,5 @@
-import News from "../News.js";
-import fileService from "../fileService.js";
+import News from "../Schemes/News.js";
+import fileService from "./fileService.js";
 
 function createNewDate(){
     const date = new Date()

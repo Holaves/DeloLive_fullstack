@@ -12,20 +12,13 @@ interface NewsWithoutSliderProps{
 }
 
 const NewsWithoutSlider: FC<NewsWithoutSliderProps> = ({NewsList}) => {
-    const [fullNewsList, setFullNewsList] = useState <NewsItemType[]>([])
     
-    useEffect(() => {
-        axiosRequests.GET<NewsItemType>('/api/news')
-        .then(response => setFullNewsList(response))
-        .catch(e => console.log(e))
-    }, [])
-
     return (
         <div className='NewsWithoutSlider'>
             <div className="NewsList">
                 {
                     NewsList.length !== 0 ?
-                    NewsList.map((item: NewsItemType, index: number) =>
+                    NewsList.slice(0, 3).map((item: NewsItemType, index: number) =>
                      <NewsItem
                         _id={item._id}
                         key={index + 1}
@@ -42,7 +35,7 @@ const NewsWithoutSlider: FC<NewsWithoutSliderProps> = ({NewsList}) => {
                 }
             </div>
             {
-                fullNewsList.length > 3 ?
+                NewsList.length > 3 ?
                 <div className="buttonCont">
                     <Link to='/news' style={{textDecoration:"none"}}>
                         <Button

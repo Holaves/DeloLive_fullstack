@@ -1,41 +1,90 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from 'react';
+import { Form, Link } from 'react-router-dom';
+import { NavItem, Nav, NavDropdown, FormControl } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css'
+import axiosRequests from '../../../classes/axiosRequests';
 
 const Navbar = () => {
-    const [burgerButtonEl, setburgerButtonEl] = useState <string>('') 
-    const [burgerMenuToggle, setBurgerMenuToggle] = useState <boolean>(false)
+    type nameDropdown = "" | "city" | "help"
 
-    const BurgerMenuToggle = () => {
-        if(!burgerMenuToggle)
-        {
-            setBurgerMenuToggle(true)
-            setburgerButtonEl('_active')
-        }
-        else
-        {
-            setBurgerMenuToggle(false)
-            setburgerButtonEl('')
-        }
+   
+    const [cities, setCities] = useState <any>([])
+    const [isHoverDropdown, setIsHoverDropdown] = useState <nameDropdown>("")
+    const [burgerButtonEl, setburgerButtonEl] = useState <string>('') 
+    const [cityTitle, setCityTitle] = useState <string>('Город')
+
+    const liRefhelp = useRef <HTMLDivElement>(null)
+    const liRefcity = useRef <HTMLDivElement>(null)
+    const onMouseEventHandler = (isName: nameDropdown) => {
+        setIsHoverDropdown(isName)
     }
 
+    useEffect(() => {
+        const url = "https://api.hh.ru/areas"
+        axiosRequests.GET(url)
+        .then(response => setCities(response))
+        .catch(e => console.log(e))
+    })
     return (
-        <nav className='Navbar'>
+        <Nav className='Navbar'>
             <div className="Navbar__wrapper">
                 <div className="logo"></div>
                 <div className="Navlist-Telephone">
                     
                     <ul className="Navlist-Telephone__list">
-                        <li className="Navlist-Telephone__list__item"><Link to="/" className='Navlist-Telephone__list__item'>Главная</Link></li>
-                        <li className="Navlist-Telephone__list__item"><Link to="/aboutUs" className='Navlist-Telephone__list__item'>О нас</Link></li>
-                        <li className='Navlist-Telephone__list__item_open' onClick={() => {}}>
-                            <h4 className="Navlist-Telephone__list__item_open__text">Помощь</h4>
-                            <div className="Navlist-Telephone__list__item_open__openIcon"></div>
-                        </li>
-                        <li className='Navlist-Telephone__list__item_open' onClick={() => {}} >
-                            <h4 className="Navlist-Telephone__list__item_open__text" id='City-nav'>Санкт-Петербург</h4>
-                            <div className="Navlist-Telephone__list__item_open__openIcon"></div>
-                        </li>
+
+                        <LinkContainer to="/">
+                            <NavItem className="Navlist-Telephone__list__item">Главная</NavItem>
+                        </LinkContainer>
+
+                        <LinkContainer to="/aboutUs">
+                            <NavItem className="Navlist-Telephone__list__item">О нас</NavItem>
+                        </LinkContainer>
+
+                        <NavDropdown
+                            title="Помощь"
+                            style={{color: "red"}}
+                            ref={liRefhelp}
+                            className='Navbar-dropdown Navlist-Telephone__list__item_open'
+                            id="basic-nav-dropdown"
+                        >
+                            <NavDropdown.Item>Итем1</NavDropdown.Item>
+                            <NavDropdown.Item>Итем2</NavDropdown.Item>
+                            <NavDropdown.Item>Итем3</NavDropdown.Item>
+                            <NavDropdown.Item>Итем4</NavDropdown.Item>
+                        </NavDropdown>
+                        
+                        <NavDropdown
+                            title={cityTitle}
+                            style={{color: "red"}}
+                            ref={liRefcity}
+                            onMouseEnter={() => onMouseEventHandler("city")} 
+                            onMouseLeave={() => onMouseEventHandler("city")} 
+                            className='Navbar-dropdown Navlist-Telephone__list__item_open'
+                            id="basic-nav-dropdown"
+                        >
+                            <Form>
+                                <FormControl type="text"
+                                    placeholder='Поиск..'
+                                    className='mr-sm-2'
+                                    style={{
+                                        boxShadow: 'none',
+                                        border: 'none',
+                                        borderBottom: '1px solid black',
+                                        borderBottomLeftRadius:'0px',
+                                        borderBottomRightRadius:'0px'
+                                    }}
+                                />
+                            </Form>
+                            <div className="NavDropItems">
+                                <NavDropdown.Item onClick={e => setCityTitle(e.currentTarget.innerText)}>Итем1</NavDropdown.Item>
+                                <NavDropdown.Item onClick={e => setCityTitle(e.currentTarget.innerText)}>Итем2</NavDropdown.Item>
+                                <NavDropdown.Item onClick={e => setCityTitle(e.currentTarget.innerText)}>Итем3</NavDropdown.Item>
+                                <NavDropdown.Item onClick={e => setCityTitle(e.currentTarget.innerText)}>Итем4</NavDropdown.Item>
+                            </div>
+                        </NavDropdown>
                     </ul>
                     <h3 className="Telephone">+7 495 967 13 01</h3>
 
@@ -46,7 +95,6 @@ const Navbar = () => {
                 </Link>
                 <div 
                     className="Burger-button"
-                    onClick={BurgerMenuToggle}
                 >
                     <div className="Burger-button__el"></div>
                     <div className="Burger-button__el"></div>
@@ -54,7 +102,7 @@ const Navbar = () => {
                 </div>
                
             </div>
-        </nav>
+        </Nav>
     );
 };
 

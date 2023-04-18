@@ -1,5 +1,5 @@
-import Offer from "../Offer.js";
-import fileService from "../fileService.js";
+import Offer from "../Schemes/Offer.js";
+import fileService from "./fileService.js";
 
 class OfferService {
     async create(offer, image) {

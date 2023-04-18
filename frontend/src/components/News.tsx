@@ -23,7 +23,7 @@ const News = () => {
              <Title hType='h1'>новости</Title>
             {
                 windowWidth > 1000 ?
-                <NewsWithoutSlider NewsList={NewsList.slice(0, 3)} /> :
+                <NewsWithoutSlider NewsList={NewsList} /> :
                 <NewsSlider NewsList={NewsList.slice(0, 30)}/>
             } 
         </div>

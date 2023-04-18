@@ -3,6 +3,9 @@ $fontBlack: #000000;
 
 //////////////////////////////////// 
 
+.navbar-dropdown{
+
+}
 
 .Navbar{
     height: 80px;
@@ -26,6 +29,10 @@ $fontBlack: #000000;
 
 //////////////////////////////////// 
 
+.Navbar-dropdown{
+
+}
+
 .Navlist-Telephone{
     @media(max-width: 1000px){
         display: none;
@@ -38,9 +45,28 @@ $fontBlack: #000000;
         align-items: center;
         list-style: none;
         &__item{
+            position: relative;
             text-decoration: none;
             &:hover{
                 color:$fontBlack;
+                font-weight: 500;
+                transition: all 0.4s;
+                color: $fontBlack;
+            }
+            &::after{ 
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                height: 1px;
+                background-color: $fontBlack;
+                transition: all 0.4s;
+                transform: scaleX(0); 
+                transform-origin: left;
+            }
+            &:hover::after{ 
+                transform: scaleX(1);
             }
             @media(max-width:1030px){
                 margin-right: 40px;
@@ -58,12 +84,16 @@ $fontBlack: #000000;
             }
         }
         &__item_open{
+            display: flex;
+            flex-direction: column;
             cursor: pointer;
             margin-right: 37px;
-            display: flex;
-            align-items: center;
             &:last-child{
                 margin-right: 0;
+            }
+            &__block{
+                display: flex;
+                align-items: center;
             }
             &__text{
                 font-family: 'SF Pro Display';
@@ -74,15 +104,7 @@ $fontBlack: #000000;
                 
                 color: $fontBlack;
             }
-            &__openIcon{
-                display: inline;
-                background: url(../../../assets/images/UI-images/Navbar-images/OpenIcon.svg) no-repeat center center / cover;
-                width: 12px;
-                height: 8px;
-                position: relative;
-                top: 3px;
-                margin-left: 10px;
-            }
+            
         }
     }
     .Telephone{
@@ -102,6 +124,33 @@ $fontBlack: #000000;
 }
 #City-nav{
     font-weight: 500;
+}
+
+.Navbar-dropdown .dropdown-toggle{
+    color: $fontBlack;
+}
+
+.arrow__openIcon{
+    display: inline;
+    background: url(../../../assets/images/UI-images/Navbar-images/OpenIcon.svg) no-repeat center center / cover;
+    width: 12px;
+    height: 8px;
+    transform: rotate(0deg);
+    transition: all 0.2s;
+    position: relative;
+    top: 3px;
+    margin-left: 10px;
+}
+.arrow__openIcon_rotated{
+    display: inline;
+    background: url(../../../assets/images/UI-images/Navbar-images/OpenIcon.svg) no-repeat center center / cover;
+    width: 12px;
+    height: 8px;
+    transform: rotate(180deg);
+    transition: all 0.2s;
+    position: relative;
+    top: 3px;
+    margin-left: 10px;
 }
 
 
@@ -161,4 +210,7 @@ $fontBlack: #000000;
     margin-top: 13px;
     transition: all 0.1s ease;
     cursor: pointer;
+}
+.NavDropItems{
+    margin-top: 10px;
 }
