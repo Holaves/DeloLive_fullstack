@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo } from 'react';
+import React, { useState, useRef, useEffect, ChangeEventHandler } from 'react';
 import { Form, Link } from 'react-router-dom';
 import { NavItem, Nav, NavDropdown, FormControl } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -6,32 +6,65 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css'
 import axiosRequests from '../../../classes/axiosRequests';
 
+
 const Navbar = () => {
     type nameDropdown = "" | "city" | "help"
+    type need = 0 | 1
+    type cityType = {
+        id: number,
+        title: string,
+        area?: string;
+        region?: string
+    }
 
-   
-    const [cities, setCities] = useState <any>([])
+    const [citiesValue, setCitiesValue] = useState <string>("")
+    const [cities, setCities] = useState <cityType[]>([])
     const [isHoverDropdown, setIsHoverDropdown] = useState <nameDropdown>("")
     const [burgerButtonEl, setburgerButtonEl] = useState <string>('') 
     const [cityTitle, setCityTitle] = useState <string>('Город')
+    
+    const [firstCounter, setFirstCounter] = useState <number>(0);
+    const [sendTime, setSendTime] = useState <number>(1);
+    const [intervalId, setIntervalId] = useState <any>(null);
 
     const liRefhelp = useRef <HTMLDivElement>(null)
     const liRefcity = useRef <HTMLDivElement>(null)
 
+    let counter = 0
+
     const onMouseEventHandler = (isName: nameDropdown) => {
         setIsHoverDropdown(isName)
     }
-    const getDropdownClassName = (dropdownName: nameDropdown): string => {
-        return isHoverDropdown === dropdownName ? 'Navbar-dropdown Navlist-Telephone__list__item_open' : 'Navbar-dropdown_open Navlist-Telephone__list__item_open'
-    }
-    
-    useEffect(() => {
-        getDropdownClassName("")
-        const url = "https://api.hh.ru/areas"
-        axiosRequests.GET(url)
+    const getCities = (need: need) => {
+        axiosRequests.GET<cityType>(`/api/cities?q=${citiesValue}&need=${need}`)
         .then(response => setCities(response))
         .catch(e => console.log(e))
-    })
+    }
+    const changeCitiesHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const inputValue = e.target.value
+        setCitiesValue(inputValue)
+
+        counter = 0
+        clearInterval(intervalId);
+        
+        setIntervalId(setInterval(() => {
+            counter = counter + 0.5
+            if (counter === sendTime) {
+                clearInterval(intervalId);
+                inputValue ? getCities(1) : getCities(0)
+                return
+            }
+        }, 500));
+
+    }
+
+    useEffect(() => {
+        if(firstCounter === 0){
+            getCities(0)
+            setFirstCounter(firstCounter + 1)
+        }
+        return () => clearInterval(intervalId);
+    }, [intervalId])
     return (
         <Nav className='Navbar'>
             <div className="Navbar__wrapper">
@@ -47,33 +80,37 @@ const Navbar = () => {
                         <LinkContainer to="/aboutUs">
                             <NavItem className="Navlist-Telephone__list__item">О нас</NavItem>
                         </LinkContainer>
-
+                        
+      
                         <NavDropdown
                             title={"Помощь"}
                             style={{color: "red"}}
                             ref={liRefhelp}
-                            className={getDropdownClassName('help')}
+                            className="Navbar-dropdown Navlist-Telephone__list__item_open"
                             id="basic-nav-dropdown"
                         >
-                            <NavDropdown.Item>Итем1</NavDropdown.Item>
-                            <NavDropdown.Item>Итем2</NavDropdown.Item>
-                            <NavDropdown.Item>Итем3</NavDropdown.Item>
-                            <NavDropdown.Item>Итем4</NavDropdown.Item>
+                            <div className="Nav-dropdown-content">
+                                <NavDropdown.Item>Итем1</NavDropdown.Item>
+                                <NavDropdown.Item>Итем2</NavDropdown.Item>
+                                <NavDropdown.Item>Итем3</NavDropdown.Item>
+                                <NavDropdown.Item>Итем4</NavDropdown.Item>
+                            </div>
                         </NavDropdown>
                         
                         <NavDropdown
                             title={cityTitle}
-                            style={{color: "red"}}
                             ref={liRefcity}
                             onMouseEnter={() => onMouseEventHandler("city")} 
                             onMouseLeave={() => onMouseEventHandler("city")} 
-                            className={getDropdownClassName('city')}
+                            className="Navbar-dropdown Navlist-Telephone__list__item_open"
                             id="basic-nav-dropdown"
                         >
                             <Form>
                                 <FormControl type="text"
                                     placeholder='Поиск..'
                                     className='mr-sm-2'
+                                    onChange={changeCitiesHandler}
+                                    value={citiesValue}
                                     style={{
                                         boxShadow: 'none',
                                         border: 'none',
@@ -82,12 +119,22 @@ const Navbar = () => {
                                         borderBottomRightRadius:'0px'
                                     }}
                                 />
+                                
                             </Form>
                             <div className="NavDropItems">
-                                <NavDropdown.Item onClick={e => setCityTitle(e.currentTarget.innerText)}>Итем1</NavDropdown.Item>
+                                {/* <NavDropdown.Item onClick={e => setCityTitle(e.currentTarget.innerText)}>Итем1</NavDropdown.Item>
                                 <NavDropdown.Item onClick={e => setCityTitle(e.currentTarget.innerText)}>Итем2</NavDropdown.Item>
                                 <NavDropdown.Item onClick={e => setCityTitle(e.currentTarget.innerText)}>Итем3</NavDropdown.Item>
-                                <NavDropdown.Item onClick={e => setCityTitle(e.currentTarget.innerText)}>Итем4</NavDropdown.Item>
+                                <NavDropdown.Item onClick={e => setCityTitle(e.currentTarget.innerText)}>Итем4</NavDropdown.Item> */}
+                                {
+                                    cities.map((item: cityType) =>
+                                        <NavDropdown.Item
+                                            onClick={e => setCityTitle(e.currentTarget.innerText)}
+                                        >
+                                            {item.title}
+                                        </NavDropdown.Item>
+                                    )
+                                }
                             </div>
                         </NavDropdown>
                     </ul>

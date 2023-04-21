@@ -18,12 +18,6 @@
   height: 58px;
 }
 
-.Navbar-dropdown_open {
-  max-height: 500;
-  overflow: hidden;
-  transition: max-height 0.3s ease-in-out;
-}
-
 .Navlist-Telephone {
   display: flex;
   align-items: center;
@@ -203,4 +197,6 @@
 
 .NavDropItems {
   margin-top: 10px;
+  max-height: 300px;
+  overflow-y: scroll;
 }/*# sourceMappingURL=Navbar.css.map */

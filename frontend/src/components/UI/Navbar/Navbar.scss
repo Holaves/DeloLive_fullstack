@@ -29,13 +29,7 @@ $fontBlack: #000000;
 
 //////////////////////////////////// 
 
-.Navbar-dropdown{
-}
-.Navbar-dropdown_open{
-    max-height: 500;
-    overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
-}
+
 
 .Navlist-Telephone{
     @media(max-width: 1000px){
@@ -217,4 +211,6 @@ $fontBlack: #000000;
 }
 .NavDropItems{
     margin-top: 10px;
+    max-height: 300px;
+    overflow-y: scroll;
 }
