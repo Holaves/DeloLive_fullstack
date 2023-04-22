@@ -11,10 +11,12 @@ const NewsPage = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [navigation.state])
-    if(navigation.state === 'loading'){
+    if(navigation.state !== 'loading'){
         return (
             <div className="_container-1">
-                <Loader size='large'/>
+                <div className='loader-wrapper'>
+                    <Loader width={200} height={200}/>
+                </div>
             </div>
         )
     }

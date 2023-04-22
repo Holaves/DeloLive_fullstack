@@ -53,3 +53,12 @@
     height: 30vh;
     position: relative;
 }
+.img-loader-cont{
+  
+  display: flex;
+  img{
+      width: 100%;
+      object-fit: cover;
+      object-position: center center;
+  }
+}

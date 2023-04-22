@@ -24,3 +24,8 @@ h1,h2,h3,h4,h5, ul{
     align-items: center;
     justify-content: center;
 }
+.loader-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css'
 import axiosRequests from '../../../classes/axiosRequests';
-
+import Loader from '../Loader/Loader';
 
 const Navbar = () => {
     type nameDropdown = "" | "city" | "help"
@@ -26,6 +26,7 @@ const Navbar = () => {
     const [firstCounter, setFirstCounter] = useState <number>(0);
     const [sendTime, setSendTime] = useState <number>(1);
     const [intervalId, setIntervalId] = useState <any>(null);
+    const [isLoading, setIsLoading] = useState <boolean>(false)
 
     const liRefhelp = useRef <HTMLDivElement>(null)
     const liRefcity = useRef <HTMLDivElement>(null)
@@ -51,8 +52,12 @@ const Navbar = () => {
             counter = counter + 0.5
             if (counter === sendTime) {
                 clearInterval(intervalId);
+                setIsLoading(false)
                 inputValue ? getCities(1) : getCities(0)
                 return
+            }
+            else if(!isLoading){
+                setIsLoading(true)
             }
         }, 500));
 
@@ -109,6 +114,7 @@ const Navbar = () => {
                                 <FormControl type="text"
                                     placeholder='Поиск..'
                                     className='mr-sm-2'
+                                    spellCheck={false}
                                     onChange={changeCitiesHandler}
                                     value={citiesValue}
                                     style={{
@@ -121,12 +127,16 @@ const Navbar = () => {
                                 />
                                 
                             </Form>
-                            <div className="NavDropItems">
+                            <div className="NavDropItems"
+                            style={isLoading ? {overflowY: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center'}
+                             : {}}
+                            >
                                 {/* <NavDropdown.Item onClick={e => setCityTitle(e.currentTarget.innerText)}>Итем1</NavDropdown.Item>
                                 <NavDropdown.Item onClick={e => setCityTitle(e.currentTarget.innerText)}>Итем2</NavDropdown.Item>
                                 <NavDropdown.Item onClick={e => setCityTitle(e.currentTarget.innerText)}>Итем3</NavDropdown.Item>
                                 <NavDropdown.Item onClick={e => setCityTitle(e.currentTarget.innerText)}>Итем4</NavDropdown.Item> */}
                                 {
+                                    !isLoading ?
                                     cities.map((item: cityType) =>
                                         <NavDropdown.Item
                                             onClick={e => setCityTitle(e.currentTarget.innerText)}
@@ -134,6 +144,8 @@ const Navbar = () => {
                                             {item.title}
                                         </NavDropdown.Item>
                                     )
+                                    :
+                                    <Loader width={84} height={50}/>
                                 }
                             </div>
                         </NavDropdown>

@@ -199,4 +199,17 @@
   margin-top: 10px;
   max-height: 300px;
   overflow-y: scroll;
+}
+
+.img-loader-cont {
+  height: 50px;
+  width: 84px;
+  display: flex;
+}
+.img-loader-cont img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
 }/*# sourceMappingURL=Navbar.css.map */

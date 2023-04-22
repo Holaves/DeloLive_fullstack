@@ -213,4 +213,14 @@ $fontBlack: #000000;
     margin-top: 10px;
     max-height: 300px;
     overflow-y: scroll;
+} 
+.img-loader-cont{
+    height: 50px;
+    width: 84px;
+    display: flex;
+    img{
+        width: 100%;
+        object-fit: cover;
+        object-position: center center;
+    }
 }

@@ -2,18 +2,14 @@ import React, { FC } from 'react';
 import './Loader.css'
 
 interface LoaderProps {
-    size?: string;
-    color?: string;
+    width: number,
+    height: number
 }
 
-const Loader:FC<LoaderProps> = ({ size = 'medium', color = '#000000' }) => {
+const Loader:FC<LoaderProps> = ({ width, height }) => {
     return (
-        <div className="loader_wrapper">
-            <div className={`Loader Loader_${size}`}>
-                <div className="Loader__circle" style={{ borderColor: color }}></div>
-                <div className="Loader__circle" style={{ borderColor: color }}></div>
-                <div className="Loader__circle" style={{ borderColor: color }}></div>
-            </div>
+        <div className="img-loader-cont" style={{width: width, height: height}}>
+            <img src='https://i.pinimg.com/originals/76/77/ed/7677edd5a44b10130b8824ca020ba60b.gif' alt='load'/>
         </div>
     );
 };
