@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css'
 import axiosRequests from '../../../classes/axiosRequests';
 import Loader from '../Loader/Loader';
+import HelpItem from '../../../types/HelpItem';
 
 const Navbar = () => {
     type nameDropdown = "" | "city" | "help"
@@ -18,7 +19,10 @@ const Navbar = () => {
     }
 
     const [citiesValue, setCitiesValue] = useState <string>("")
+
     const [cities, setCities] = useState <cityType[]>([])
+    const [helps, setHelps] = useState <HelpItem[]>([])
+
     const [isHoverDropdown, setIsHoverDropdown] = useState <nameDropdown>("")
     const [burgerButtonEl, setburgerButtonEl] = useState <string>('') 
     const [cityTitle, setCityTitle] = useState <string>('Город')
@@ -67,6 +71,10 @@ const Navbar = () => {
         if(firstCounter === 0){
             getCities(0)
             setFirstCounter(firstCounter + 1)
+
+            axiosRequests.GET<HelpItem>(`/api/helps`)
+            .then(response => setHelps(response))
+            .catch(e => console.log(e))
         }
         return () => clearInterval(intervalId);
     }, [intervalId])
