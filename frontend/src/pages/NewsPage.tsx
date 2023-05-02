@@ -11,7 +11,7 @@ const NewsPage = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [navigation.state])
-    if(navigation.state !== 'loading'){
+    if(navigation.state == 'loading'){
         return (
             <div className="_container-1">
                 <div className='loader-wrapper'>

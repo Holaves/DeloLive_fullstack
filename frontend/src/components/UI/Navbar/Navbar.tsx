@@ -139,10 +139,6 @@ const Navbar = () => {
                             style={isLoading ? {overflowY: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center'}
                              : {}}
                             >
-                                {/* <NavDropdown.Item onClick={e => setCityTitle(e.currentTarget.innerText)}>Итем1</NavDropdown.Item>
-                                <NavDropdown.Item onClick={e => setCityTitle(e.currentTarget.innerText)}>Итем2</NavDropdown.Item>
-                                <NavDropdown.Item onClick={e => setCityTitle(e.currentTarget.innerText)}>Итем3</NavDropdown.Item>
-                                <NavDropdown.Item onClick={e => setCityTitle(e.currentTarget.innerText)}>Итем4</NavDropdown.Item> */}
                                 {
                                     !isLoading ?
                                     cities.map((item: cityType) =>
@@ -161,7 +157,7 @@ const Navbar = () => {
                     <h3 className="Telephone">+7 495 967 13 01</h3>
 
                 </div>
-                <Link className="Personal-nav" to='/account'>
+                <Link className="Personal-nav" to='/registration'>
                     <h5>Личный кабинет</h5>
                     <div className="Personal-nav__icon"></div>
                 </Link>

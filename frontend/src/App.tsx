@@ -17,7 +17,7 @@ import {
   RouterProvider
  } from 'react-router-dom';
 import NewsPage, { NewsPageLoader } from './pages/NewsPage';
-import AccountPage from './pages/AccountPage';
+import Registration from './pages/Registration';
 
 function App() {
   const router = createBrowserRouter(
@@ -25,7 +25,7 @@ function App() {
       <Route path="/" element={<Root />}>
         <Route index element={<Main/>} />
         <Route path='/news' element={<NewsPage/>} loader={NewsPageLoader} />
-        <Route path='/account' element={<AccountPage/>}/>
+        <Route path='/registration' element={<Registration/>}/>
       </Route>
     )
   );
