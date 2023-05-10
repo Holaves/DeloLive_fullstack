@@ -14,8 +14,11 @@ const Registration = () => {
     }
     return (
         <div>
-            <h3 style={h3Styles}>Регистрация</h3>
-            <RegistrationForm/>
+            <div className="_container-1">
+                <h3 style={h3Styles}>Регистрация</h3>
+                <RegistrationForm/>
+                
+            </div>
         </div>
     );
 };

@@ -1,0 +1,119 @@
+.FormInput {
+  margin: 0px auto;
+}
+.FormInput__title {
+  font-family: "SF Pro Display";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  text-transform: capitalize;
+  margin-left: 8px;
+  color: #0D1C41;
+}
+.FormInput__bar {
+  margin-top: 6px;
+  position: relative;
+  box-shadow: 2px -2px 12px rgba(20, 29, 61, 0.12);
+  border: transparent;
+  transition: border 0.2s;
+  border-radius: 10px;
+  height: 50px;
+  transition: all 0.5s;
+}
+.FormInput__bar:focus-within {
+  border: 1px solid rgb(196, 182, 182);
+}
+.FormInput__bar_error {
+  height: 48px;
+  margin-top: 6px;
+  position: relative;
+  transition: all 0.5s;
+}
+.FormInput__bar_error::before {
+  content: "";
+  transition: all 0.5s;
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  top: 50%;
+  left: -14px;
+  background: #DC0000;
+  border-radius: 100%;
+}
+
+.FormInput_input {
+  color: #121e3a;
+  font-weight: 400;
+  font-size: 16px;
+  height: 48px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border: transparent;
+  transition: border 0.2s;
+  border-radius: 10px;
+  outline: none;
+}
+.FormInput_input::-moz-placeholder {
+  font-family: "SF Pro Display";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #939CA6;
+}
+.FormInput_input::placeholder {
+  font-family: "SF Pro Display";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #939CA6;
+}
+
+.password_hide {
+  height: 12px;
+  width: 17px;
+  margin-right: 10px;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='10' viewBox='0 0 16 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.00033 0C4.66699 0 1.82033 2.07333 0.666992 5C1.82033 7.92667 4.66699 10 8.00033 10C11.3337 10 14.1803 7.92667 15.3337 5C14.1803 2.07333 11.3337 0 8.00033 0ZM8.00033 8.33333C6.16033 8.33333 4.66699 6.84 4.66699 5C4.66699 3.16 6.16033 1.66667 8.00033 1.66667C9.84033 1.66667 11.3337 3.16 11.3337 5C11.3337 6.84 9.84033 8.33333 8.00033 8.33333ZM8.00033 3C6.89366 3 6.00033 3.89333 6.00033 5C6.00033 6.10667 6.89366 7 8.00033 7C9.10699 7 10.0003 6.10667 10.0003 5C10.0003 3.89333 9.10699 3 8.00033 3Z' fill='%23A89060'/%3E%3C/svg%3E%0A");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  transition: all 0.5s;
+  position: relative;
+  cursor: pointer;
+}
+.password_hide::before {
+  content: "";
+  width: 2px;
+  height: 0px;
+  transition: all 0.5s;
+  background-color: #4A607A;
+  transform: rotate(-45deg);
+  position: absolute;
+  left: 25%;
+  top: 25%;
+}
+
+.password_show {
+  height: 12px;
+  width: 17px;
+  margin-right: 10px;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='10' viewBox='0 0 16 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.00033 0C4.66699 0 1.82033 2.07333 0.666992 5C1.82033 7.92667 4.66699 10 8.00033 10C11.3337 10 14.1803 7.92667 15.3337 5C14.1803 2.07333 11.3337 0 8.00033 0ZM8.00033 8.33333C6.16033 8.33333 4.66699 6.84 4.66699 5C4.66699 3.16 6.16033 1.66667 8.00033 1.66667C9.84033 1.66667 11.3337 3.16 11.3337 5C11.3337 6.84 9.84033 8.33333 8.00033 8.33333ZM8.00033 3C6.89366 3 6.00033 3.89333 6.00033 5C6.00033 6.10667 6.89366 7 8.00033 7C9.10699 7 10.0003 6.10667 10.0003 5C10.0003 3.89333 9.10699 3 8.00033 3Z' fill='%234A607A'/%3E%3C/svg%3E%0A");
+  transition: all 0.5s;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  position: relative;
+  cursor: pointer;
+}
+.password_show::before {
+  content: "";
+  width: 2px;
+  height: 18px;
+  transition: all 0.5s;
+  background-color: #4A607A;
+  position: absolute;
+  transform: rotate(-45deg);
+  left: 45%;
+  top: -25%;
+}/*# sourceMappingURL=FormInput.css.map */

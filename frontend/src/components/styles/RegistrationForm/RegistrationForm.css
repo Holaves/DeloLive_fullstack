@@ -1,1 +1,94 @@
-/*# sourceMappingURL=RegistrationForm.css.map */
+.dop-info {
+  max-width: 252px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.align-center-style {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.submitForm-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 143px;
+}
+
+.smsSystem {
+  display: flex;
+  align-items: center;
+}
+.smsSystem h6 {
+  font-family: "SF Pro Display";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+}
+
+input[type=checkbox] {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+input[type=checkbox] + label {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  width: 18px;
+  border: 2px solid #193554;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-left: 15px;
+  transition: all 0.2s;
+}
+input[type=checkbox]:checked + label {
+  display: inline-flex;
+  align-items: center;
+  background: #A89060;
+  border: 1px solid transparent;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  justify-content: center;
+  margin-left: 15px;
+  transition: all 0.2s;
+}
+input[type=checkbox]:checked + label::before {
+  content: "";
+  background: url("../../../assets/images/Registration-images/check.svg") no-repeat center center/cover;
+  display: inline-flex;
+  width: 14px;
+  height: 11px;
+}
+
+.personalDate {
+  display: flex;
+  align-items: center;
+}
+.personalDate h5 {
+  font-family: "SF Pro Display";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+  position: relative;
+}
+.personalDate h5::before {
+  content: "";
+  transition: all 0.5s;
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  top: 28%;
+  left: -20px;
+  background: #DC0000;
+  border-radius: 100%;
+}
+
+.submitButton {
+  margin-top: 46px;
+}/*# sourceMappingURL=RegistrationForm.css.map */

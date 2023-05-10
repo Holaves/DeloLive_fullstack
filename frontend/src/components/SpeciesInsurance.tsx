@@ -15,7 +15,6 @@ const SpeciesInsurance = () => {
                 <Title hType='h1' style={{textAlign: 'left', paddingRight: '20px'}}>Виды страхования</Title>
             }
             <div className="ImagesTargetBlocks">
-
                 <div className="ImagesTargetBlocks__block">
                     <h4 className="ImagesTargetBlocks__block__text">страхование жизни на случай смерти</h4>
                     <div className="ImagesTargetBlocks__block__icon-block">

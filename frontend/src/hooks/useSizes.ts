@@ -45,4 +45,3 @@ export const useSizes = (defaultSizes: WHObject[],  WHType: 'width' | 'height', 
         })
         return retVal
 }
-// пока что без аргументов
