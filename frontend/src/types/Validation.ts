@@ -1,7 +1,8 @@
 type ValidationType = {
-    minLength?: number;
-    maxLength?: number;
+    minLength: number;
+    maxLength: number;
     onlyNums?: boolean;
+    password?: boolean;
     email?: boolean;
     birthday?: boolean;
     card?: boolean;

@@ -2,11 +2,17 @@ import React, { useState } from 'react';
 import './styles/RegistrationForm/RegistrationForm.css'
 import { Col, Row } from 'react-bootstrap';
 import FormInput from './UI/FormInput/FormInput';
+import { useDispatch, useSelector } from 'react-redux';
+import { registrate, selectReg } from './globalSlices/registrationSlice';
 
 
 const RegistrationForm = () => {
+    const dispatch = useDispatch()
+    const isReg = useSelector(selectReg)
+
     const [isChecked1, setIsChecked1] = useState <boolean>(true)
     const [isChecked2, setIsChecked2] = useState <boolean>(true)
+    const [isSubmitDisabled, setIsSubmitDisabled] = useState <boolean>(false)
 
     const isChecked1Handler = () => {
         isChecked1 ? setIsChecked1(false) : setIsChecked1(true)
@@ -14,21 +20,32 @@ const RegistrationForm = () => {
     const isChecked2Handler = () => {
         isChecked2 ? setIsChecked2(false) : setIsChecked2(true)
     }
+    const isRegSet =  () => {
+        dispatch(registrate())
+        setIsSubmitDisabled(true)
+
+        setTimeout(() => {
+            setIsSubmitDisabled(false)
+        }, 5000);
+    }
     return (
         <div className='RegistrationForm' style={{marginTop: '73px'}}>
-            <div className="RegistrationForm__wrapper">
+            <form className="RegistrationForm__wrapper">
                 <Row>
                     <Col className='align-center-style'>
                         <FormInput
+                        field='surname'
                         indexOne = {true}
                         placeholder='Иванов'
                         title='Фамилия'
                         />
                         <FormInput
+                        field='name'
                         placeholder='Иван'
                         title='Имя'
                         />
                         <FormInput
+                        field='fatherName'
                         placeholder='Иванович'
                         title='Отчество'
                         />
@@ -37,31 +54,42 @@ const RegistrationForm = () => {
                         <FormInput
                         indexOne = {true}
                         placeholder=''
+                        field='telephone'
                         title='Телефон'
                         isTel={true}
                         />
                         <FormInput
+                        field='email'
                         placeholder='mail@example.ru'
                         title='E-mail'
                         validation={{
                             minLength: 6,
+                            maxLength: 100,
                             email: true
                         }}
                         />
                         <FormInput
+                        field='password'
                         placeholder='Придумайте пароль'
                         title='Пароль'
                         isPassword={true}
                         validation={{
-                            minLength: 5
+                            password: true,
+                            minLength: 5,
+                            maxLength: 50
                         }}
                         />
                         <FormInput
+                        field='none'
                         inputType='password'
                         placeholder='Повторите пароль'
                         title='Подтверждение пароля'
                         errorMessage='Пароли не совпадают, попробуйте
                         ввести еще раз'
+                        validation={{
+                            minLength: 5,
+                            maxLength: 50
+                        }}
                         />
                     </Col>
                     <Col className='align-center-style'>
@@ -69,19 +97,22 @@ const RegistrationForm = () => {
                             На указанные контактные данные придет код для подтверждения регистрации
                         </div>
                         <FormInput
+                        field='birthdate'
                         placeholder='ДД.ММ.ГГГГ'
                         title='Дата рождения'
                         errorMessage='Введите дату рождения'
                         width={'small'}
                         date={true}
                         validation={{
+                            minLength: 0,
+                            maxLength: 100,
                             birthday: true
                         }}
                         />
                         <FormInput
+                        field='card'
                         placeholder='123456'
                         title='Номер карты клиента'
-                        errorMessage='Укажите (если имеется) последние шесть цифр'
                         isInfo={true}
                         width={'small'}
                         />
@@ -99,10 +130,16 @@ const RegistrationForm = () => {
                             <input type='checkbox' name='data' checked={isChecked2}/>    
                             <label htmlFor="sms" onClick={isChecked2Handler}></label>
                         </div>
-                        <input type="submit" className='submitButton' value="Зарегестрироваться"/>
+                        <input
+                        type="submit"
+                        disabled={isSubmitDisabled}
+                        className='submitButton'
+                        value="Зарегестрироваться"
+                        onClick={isRegSet}
+                        />
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     );
 };

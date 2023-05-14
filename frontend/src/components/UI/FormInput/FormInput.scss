@@ -1,4 +1,12 @@
-
+.FormInput__errorMessage{
+    font-family: 'SF Pro Display';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #DC0000;
+    max-width: 265px;
+    margin-top: 5px;
+}
 .FormInput{
     margin: 0px auto;
     &__title{
@@ -26,18 +34,27 @@
 
     }
     &__bar_error{
-        height: 48px;
         margin-top: 6px;
         position: relative;
+        box-shadow: 2px -2px 12px rgba(20, 29, 61, 0.12);
+        border: transparent;
+        transition: border 0.2s;
+        border-radius: 10px;
+        height: 50px;
+
+
         transition: all 0.5s;
+        &:focus-within{
+            border: 1px solid rgb(196, 182, 182);
+        }
         &::before{
             content: '';
             transition: all 0.5s;
             width: 8px;
             height: 8px;
             position: absolute;
-            top: 50%;
-            left: -14px;
+            top: 42%;
+            left: -20px;
             background: #DC0000;
             border-radius: 100%;
         }
