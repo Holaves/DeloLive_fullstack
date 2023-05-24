@@ -1,4 +1,5 @@
 import axios from "axios"
+import createUser from "../types/createUser";
 
 interface bodyPost{
     description: string;
@@ -14,13 +15,19 @@ class axiosReq{
         const resp = await axios.get(url + '/' + id)
         return resp.data as T
     }
-    async POST(url: string, body: bodyPost, imageFile: File){
+    async POSTnews(url: string, body: bodyPost, imageFile: File){
         const formData = new FormData();
         formData.append('description', body.description);
         formData.append('subDescription', JSON.stringify(body.subDescription));
         formData.append('image', imageFile);
     
         await axios.post(url, formData)
+          .catch(error => {
+            console.log(error);
+          });
+    }
+    async POSTuser(url: string, body: createUser){
+        await axios.post(url, body)
           .catch(error => {
             console.log(error);
           });

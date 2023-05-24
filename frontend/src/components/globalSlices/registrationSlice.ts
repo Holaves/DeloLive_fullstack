@@ -3,13 +3,16 @@ import createUser from "../../types/createUser";
 
 interface initalStateInterface{
     isState: boolean;
+    setPassword: string;
     createUserData: createUser;
+    isSetPassword: boolean;
 }
 
 
 const initialState: initalStateInterface = {
     isState: false,
-    
+    setPassword: '',
+    isSetPassword: false,
 
     createUserData: {
         surname: '',
@@ -32,13 +35,21 @@ export const registrationSlice = createSlice({
         },
         setUserData: (state, action: PayloadAction<Partial<createUser>>) => {
             state.createUserData = { ...state.createUserData, ...action.payload };
+        },
+        setPasswordUpdate: (state, action: PayloadAction<Partial<string>>) => {
+            state.setPassword = action.payload
+        },
+        setIsSetPassword: (state, action: PayloadAction<Partial<boolean>>) => {
+            state.isSetPassword = action.payload
         }
     }
 })
 
-export const { registrate, setUserData } = registrationSlice.actions;
+export const { registrate, setUserData, setPasswordUpdate, setIsSetPassword } = registrationSlice.actions;
 
 export const selectReg = (state: any) => state.registration.isState;
 export const selectUserData = (state: any) => state.registration.createUserData;
+export const setPassword = (state: any) => state.registration.setPassword;
+export const isSetPassword = (state: any) => state.registration.isSetPassword;
 
 export default registrationSlice.reducer;

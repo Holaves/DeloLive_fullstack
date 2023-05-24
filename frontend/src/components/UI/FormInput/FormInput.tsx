@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import ValidationType from '../../../types/Validation';
 import './FormInput.css'
 import { useDate } from '../../../hooks/useDate'
-import { selectReg, selectUserData, setUserData } from '../../globalSlices/registrationSlice';
+import { selectReg, selectUserData, setIsSetPassword, setPassword, setPasswordUpdate, setUserData } from '../../globalSlices/registrationSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { varCreateUser } from '../../../types/createUser';
 interface FormInputProps{
@@ -13,6 +13,7 @@ interface FormInputProps{
     isPassword?: boolean;
     isInfo?: boolean;
     isTel?: boolean;
+    checkPassword?: boolean;
     validation?: ValidationType;
     date?: boolean;
     width?: 'normal' | 'small' | 'large';
@@ -25,6 +26,7 @@ const FormInput: FC<FormInputProps> = ({
     placeholder,
     isTel = false,
     title,
+    checkPassword = false,
     errorMessage,
     validation = {
         minLength: 1,
@@ -40,7 +42,8 @@ const FormInput: FC<FormInputProps> = ({
 }) => {
     const dispatch = useDispatch()
     const selectedReg = useSelector(selectReg)
-    const c = useSelector(selectUserData)
+    const userDateRedux = useSelector(selectUserData)
+    const checkPasswordDate = useSelector(setPassword)
 
     const [passwordShow, setPasswordShow] = useState <boolean>(true)
     const [counterSend, setCounterSend] = useState <number>(0)
@@ -51,6 +54,9 @@ const FormInput: FC<FormInputProps> = ({
     const [telNum, setTelNum] = useState <string>('+7 (___) ___-__-_')
     const [inputText, setInputText] = useState <string>('')
     const [inputDate, setInputDate] = useState <string>(useDate())
+
+    const [sendTime, setSendTime] = useState <number>(1);
+    const [intervalId, setIntervalId] = useState <any>(null);
 
     const passwordShowHandler = () => {
         if(passwordShow){
@@ -76,7 +82,7 @@ const FormInput: FC<FormInputProps> = ({
         if(field === 'none') return false
         if(validation.minLength <= currentText.length || isTel){
             if(validation.maxLength >= currentText.length || isTel){
-                if(field !== 'birthdate' && field !== 'card' && field !== 'telephone' && field !== 'password'){
+                if(field !== 'birthdate' && field !== 'card' && field !== 'telephone' && field !== 'password' && field !== 'check'){
                     currentText = currentText.trim()
                     if (!/\s/g.test(currentText)){
                         setIsError(false)
@@ -122,10 +128,23 @@ const FormInput: FC<FormInputProps> = ({
                             createErrorMsg('Пароль не должен содержать символов: "пробел" , "/" , "/"')
                         }
                     }
+                    else if(checkPassword){
+                        console.log('check1')
+                        if(checkPasswordDate === inputText){
+                            setIsError(false)
+                            dispatch(setIsSetPassword(true))
+                            return true
+                        }
+                        else{
+                            createErrorMsg('Пароли не совпадают')
+                        }
+                    }
+
                     else if(field === 'card'){
                         setIsError(false)
                         return true
                     }
+                    
                 }
             }
             else{
@@ -166,12 +185,32 @@ const FormInput: FC<FormInputProps> = ({
 
         if(field !== 'none' && valid){
             dispatch(setUserData({[field]: dataValue}))
-            console.log(c)
+            console.log(userDateRedux)
         }
     }
+    let counter = 0
     const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         let inputValue: string = e.target.value
         setInputText(inputValue)
+    }
+    const passwordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let inputValue: string = e.target.value
+        console.log('ph1')
+        counter = 0
+        clearInterval(intervalId);
+
+        setIntervalId(setInterval(() => {
+            counter = counter + 0.5
+            if (counter === sendTime) {
+                dispatch(setPasswordUpdate(inputValue))
+                console.log('sendPassOnRedux')
+                console.log(checkPasswordDate)
+                clearInterval(intervalId);
+                return
+            }
+        }, 500));
+        setInputText(inputValue)
+
     }
     const dateHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         let inputValue: string = e.target.value
@@ -262,7 +301,7 @@ const FormInput: FC<FormInputProps> = ({
                 <input
                 style={{width: inputWidth}}
                 type={getInputType()}
-                onChange={isTel ? telNumHandler : date ? dateHandler : inputHandler}
+                onChange={isTel ? telNumHandler : date ? dateHandler : isPassword ? passwordHandler : inputHandler}
                 value={getInputValue()}
                 autoComplete='new-password'
                 className='FormInput_input'
@@ -286,7 +325,7 @@ const FormInput: FC<FormInputProps> = ({
             </div>
             {
                 isError ?
-                errorMessage 
+                errorMessage
                     ? 
                         <div className='FormInput__errorMessage' style={{maxWidth: inputWidth}}>{errorMessage}</div>
                     :

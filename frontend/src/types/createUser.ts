@@ -13,6 +13,6 @@ export type varCreateUser =
 'surname' | 'name' |
 'fatherName' | 'telephone' |
  'email' | 'password' |
-  'birthdate' | 'card' | 'none'
+  'birthdate' | 'card' | 'check' | 'none'
  
 export default createUser

@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles/RegistrationForm/RegistrationForm.css'
 import { Col, Row } from 'react-bootstrap';
 import FormInput from './UI/FormInput/FormInput';
 import { useDispatch, useSelector } from 'react-redux';
-import { registrate, selectReg } from './globalSlices/registrationSlice';
+import { isSetPassword, registrate, selectReg, selectUserData } from './globalSlices/registrationSlice';
+import axiosRequests from '../classes/axiosRequests';
 
 
 const RegistrationForm = () => {
     const dispatch = useDispatch()
     const isReg = useSelector(selectReg)
+    const allData = useSelector(selectUserData)
+    const isCheckPassword = useSelector(isSetPassword)
 
     const [isChecked1, setIsChecked1] = useState <boolean>(true)
     const [isChecked2, setIsChecked2] = useState <boolean>(true)
@@ -20,6 +23,20 @@ const RegistrationForm = () => {
     const isChecked2Handler = () => {
         isChecked2 ? setIsChecked2(false) : setIsChecked2(true)
     }
+    function areAllFieldsFilled(obj: object) {
+        for (var key in obj) {
+        // @ts-ignore
+          if (typeof obj[key] !== 'string' || obj[key].trim() === '') {
+            return false;
+          }
+        }
+        return true;
+    }
+    const sendALLData = () => {
+        if(areAllFieldsFilled(allData) && isCheckPassword){
+            axiosRequests.POSTuser('/api/registration', allData)
+        }
+    }
     const isRegSet =  () => {
         dispatch(registrate())
         setIsSubmitDisabled(true)
@@ -28,6 +45,9 @@ const RegistrationForm = () => {
             setIsSubmitDisabled(false)
         }, 5000);
     }
+    useEffect(() => {
+        sendALLData()
+    }, [isReg])
     return (
         <div className='RegistrationForm' style={{marginTop: '73px'}}>
             <form className="RegistrationForm__wrapper">
@@ -80,12 +100,11 @@ const RegistrationForm = () => {
                         }}
                         />
                         <FormInput
-                        field='none'
+                        field='check'
                         inputType='password'
                         placeholder='Повторите пароль'
+                        checkPassword = {true}
                         title='Подтверждение пароля'
-                        errorMessage='Пароли не совпадают, попробуйте
-                        ввести еще раз'
                         validation={{
                             minLength: 5,
                             maxLength: 50
