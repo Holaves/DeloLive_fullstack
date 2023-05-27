@@ -51,7 +51,7 @@ const InsuranceProg: FC<InsuranceProgProps> = ({textProps, img, margintop, anima
                     <div className="InsuranceProg__wrapper__Title-Image">
                         <div className="InsuranceProg__wrapper__Title-Image__Title">
                             <div className="InsuranceProg__wrapper__Title-Image__Title__SubTitle">
-                                <h2>{textProps.subTitle}</h2>
+                                <h2 className={!animationState ? 'text-focus-in' : 'none'}>{textProps.subTitle}</h2>
                                     {textProps.IconInfo ?
                                         <div className="iconInfo"></div> :
                                         <div></div>

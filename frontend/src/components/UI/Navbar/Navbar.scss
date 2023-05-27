@@ -1,11 +1,8 @@
 // Var
 $fontBlack: #000000;
+$hoverColor: var(--bs-link-hover-color);
 
 //////////////////////////////////// 
-
-.navbar-dropdown{
-
-}
 
 .Navbar{
     height: 80px;
@@ -47,25 +44,10 @@ $fontBlack: #000000;
             text-decoration: none;
             &:hover{
                 color:$fontBlack;
-                font-weight: 500;
                 transition: all 0.4s;
-                color: $fontBlack;
+                color: $hoverColor;
             }
-            &::after{ 
-                content: '';
-                position: absolute;
-                left: 0;
-                bottom: 0;
-                width: 100%;
-                height: 1px;
-                background-color: $fontBlack;
-                transition: all 0.4s;
-                transform: scaleX(0); 
-                transform-origin: left;
-            }
-            &:hover::after{ 
-                transform: scaleX(1);
-            }
+          
             @media(max-width:1030px){
                 margin-right: 40px;
             }

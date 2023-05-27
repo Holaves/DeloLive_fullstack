@@ -3,7 +3,7 @@ import './styles/RegistrationForm/RegistrationForm.css'
 import { Col, Row } from 'react-bootstrap';
 import FormInput from './UI/FormInput/FormInput';
 import { useDispatch, useSelector } from 'react-redux';
-import { isSetPassword, registrate, selectReg, selectUserData } from './globalSlices/registrationSlice';
+import { isSetPassword, validate, selectReg, selectUserData, registrate } from './globalSlices/registrationSlice';
 import axiosRequests from '../classes/axiosRequests';
 
 
@@ -34,16 +34,25 @@ const RegistrationForm = () => {
     }
     const sendALLData = () => {
         if(areAllFieldsFilled(allData) && isCheckPassword){
+            console.log('sendDate')
             axiosRequests.POSTuser('/api/registration', allData)
         }
+        else{
+            console.log('areAllFieldsFilled - ' + areAllFieldsFilled(allData))
+            console.log('checkPassword - ' + isCheckPassword)
+        }
     }
-    const isRegSet =  () => {
-        dispatch(registrate())
+    const isRegSet = () => {
+        console.log('valid')
+        dispatch(validate());
+
         setIsSubmitDisabled(true)
 
         setTimeout(() => {
+            dispatch(registrate())
             setIsSubmitDisabled(false)
-        }, 5000);
+        }, 3000)
+
     }
     useEffect(() => {
         sendALLData()

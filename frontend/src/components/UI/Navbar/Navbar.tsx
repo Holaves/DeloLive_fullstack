@@ -87,11 +87,11 @@ const Navbar = () => {
                     <ul className="Navlist-Telephone__list">
 
                         <LinkContainer to="/">
-                            <NavItem className="Navlist-Telephone__list__item">Главная</NavItem>
+                            <NavItem className="Navlist-Telephone__list__item text-focus-in">Главная</NavItem>
                         </LinkContainer>
 
                         <LinkContainer to="/aboutUs">
-                            <NavItem className="Navlist-Telephone__list__item">О нас</NavItem>
+                            <NavItem className="Navlist-Telephone__list__item text-focus-in">О нас</NavItem>
                         </LinkContainer>
                         
       
@@ -99,7 +99,7 @@ const Navbar = () => {
                             title={"Помощь"}
                             style={{color: "red"}}
                             ref={liRefhelp}
-                            className="Navbar-dropdown Navlist-Telephone__list__item_open"
+                            className="Navbar-dropdown Navlist-Telephone__list__item_open text-focus-in"
                             id="basic-nav-dropdown"
                         >
                             <div className="Nav-dropdown-content">
@@ -114,8 +114,9 @@ const Navbar = () => {
                             title={cityTitle}
                             ref={liRefcity}
                             onMouseEnter={() => onMouseEventHandler("city")} 
-                            onMouseLeave={() => onMouseEventHandler("city")} 
-                            className="Navbar-dropdown Navlist-Telephone__list__item_open"
+                            onMouseLeave={() => onMouseEventHandler("city")}
+                            onClick={() => onMouseEventHandler("city")}
+                            className="Navbar-dropdown Navlist-Telephone__list__item_open text-focus-in"
                             id="basic-nav-dropdown"
                         >
                             <Form>

@@ -1,5 +1,21 @@
 $textColor: #0D1C41;
 
+@keyframes flip-horizontal-bottom {
+    0% {
+      -webkit-transform: rotateX(0);
+              transform: rotateX(0);
+    }
+    100% {
+      -webkit-transform: rotateX(-180deg);
+              transform: rotateX(-180deg);
+    }
+  }
+  
+  
+  .flip-horizontal-bottom {
+	-webkit-animation: flip-horizontal-bottom 0.3s cubic-bezier(0.455, 0.030, 0.515, 0.955) 0.1s reverse none;
+	        animation: flip-horizontal-bottom 0.3s cubic-bezier(0.455, 0.030, 0.515, 0.955) 0.1s reverse none;
+}
 
 .Trigger{
     box-shadow: 0px 2px 18px rgba(41, 41, 41, 0.1);

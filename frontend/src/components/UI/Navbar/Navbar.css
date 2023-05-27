@@ -45,24 +45,8 @@
 }
 .Navlist-Telephone__list__item:hover {
   color: #000000;
-  font-weight: 500;
   transition: all 0.4s;
-  color: #000000;
-}
-.Navlist-Telephone__list__item::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 1px;
-  background-color: #000000;
-  transition: all 0.4s;
-  transform: scaleX(0);
-  transform-origin: left;
-}
-.Navlist-Telephone__list__item:hover::after {
-  transform: scaleX(1);
+  color: var(--bs-link-hover-color);
 }
 @media (max-width: 1030px) {
   .Navlist-Telephone__list__item {

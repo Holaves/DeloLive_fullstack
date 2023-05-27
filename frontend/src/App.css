@@ -1,3 +1,7 @@
+:root{
+    --bs-link-hover-color: #b38c3f !important;
+}
+
 *,::before,::after{
     box-sizing: border-box;
     padding: 0;
@@ -28,4 +32,35 @@ h1,h2,h3,h4,h5, ul{
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+@-webkit-keyframes text-focus-in {
+    0% {
+      -webkit-filter: blur(12px);
+              filter: blur(12px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-filter: blur(0px);
+              filter: blur(0px);
+      opacity: 1;
+    }
+  }
+  @keyframes text-focus-in {
+    0% {
+      -webkit-filter: blur(12px);
+              filter: blur(12px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-filter: blur(0px);
+              filter: blur(0px);
+      opacity: 1;
+    }
+  }
+  
+
+.text-focus-in{
+	-webkit-animation: text-focus-in 0.7s cubic-bezier(0.550, 0.085, 0.680, 0.530) 0.1s both;
+	        animation: text-focus-in 0.7s cubic-bezier(0.550, 0.085, 0.680, 0.530) 0.1s both;
 }

@@ -39,7 +39,7 @@ const Trigger: FC<TriggerProps> = ({imgPath, title, buttonText, buttonTextTwo, t
             style={{marginTop: title.trim().split(/\s+/).length >= 2 ? '50px' : '74px'}}
             >{title}</h1>
             <div
-            className="Trigger__image-cont"
+            className="Trigger__image-cont flip-horizontal-bottom"
             style={{width: useSizes(TriggerWH, 'width', title),
             // Костыль!
             height:  useSizes(TriggerWH, 'height', title)}} 

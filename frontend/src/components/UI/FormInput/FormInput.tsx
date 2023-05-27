@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import ValidationType from '../../../types/Validation';
 import './FormInput.css'
 import { useDate } from '../../../hooks/useDate'
-import { selectReg, selectUserData, setIsSetPassword, setPassword, setPasswordUpdate, setUserData } from '../../globalSlices/registrationSlice';
+import { selectValid, selectUserData, setIsSetPassword, setPassword, setPasswordUpdate, setUserData } from '../../globalSlices/registrationSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { varCreateUser } from '../../../types/createUser';
 interface FormInputProps{
@@ -41,7 +41,7 @@ const FormInput: FC<FormInputProps> = ({
     inputType = "text"
 }) => {
     const dispatch = useDispatch()
-    const selectedReg = useSelector(selectReg)
+    const selectedReg = useSelector(selectValid)
     const userDateRedux = useSelector(selectUserData)
     const checkPasswordDate = useSelector(setPassword)
 
@@ -89,7 +89,6 @@ const FormInput: FC<FormInputProps> = ({
                         return true
                     }
                     else{
-                        console.log('sumbols')
                         createErrorMsg('Это поле не должно содержать знак пробела')
                     }
                 }
@@ -104,7 +103,6 @@ const FormInput: FC<FormInputProps> = ({
                         currentText = currentText.replaceAll('-', '')
                         currentText = currentText.replace('(', '')
                         currentText = currentText.replace(')', '')
-                        console.log(currentText)
                         
                         if(validation.minLength < currentText.length){
                             if(validation.maxLength >= currentText.length){
@@ -129,7 +127,6 @@ const FormInput: FC<FormInputProps> = ({
                         }
                     }
                     else if(checkPassword){
-                        console.log('check1')
                         if(checkPasswordDate === inputText){
                             setIsError(false)
                             dispatch(setIsSetPassword(true))
@@ -138,6 +135,10 @@ const FormInput: FC<FormInputProps> = ({
                         else{
                             createErrorMsg('Пароли не совпадают')
                         }
+                    }
+                    else if(field === 'birthdate'){
+                        setIsError(false)
+                        return true
                     }
 
                     else if(field === 'card'){
@@ -148,13 +149,10 @@ const FormInput: FC<FormInputProps> = ({
                 }
             }
             else{
-                console.log('макс: ' + field)
                 createErrorMsg('Максимальное кол-во символов для этого поля - ' + String(validation.maxLength))
             }
         }
         else{
-            console.log('мин: ' + field)
-
             createErrorMsg('Минимальное кол-во символов для этого поля - ' + String(validation.minLength))
         }
         return valid
@@ -185,7 +183,6 @@ const FormInput: FC<FormInputProps> = ({
 
         if(field !== 'none' && valid){
             dispatch(setUserData({[field]: dataValue}))
-            console.log(userDateRedux)
         }
     }
     let counter = 0
@@ -195,7 +192,6 @@ const FormInput: FC<FormInputProps> = ({
     }
     const passwordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         let inputValue: string = e.target.value
-        console.log('ph1')
         counter = 0
         clearInterval(intervalId);
 
@@ -203,8 +199,6 @@ const FormInput: FC<FormInputProps> = ({
             counter = counter + 0.5
             if (counter === sendTime) {
                 dispatch(setPasswordUpdate(inputValue))
-                console.log('sendPassOnRedux')
-                console.log(checkPasswordDate)
                 clearInterval(intervalId);
                 return
             }

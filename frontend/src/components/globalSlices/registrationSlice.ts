@@ -2,6 +2,7 @@ import { createSlice , PayloadAction} from "@reduxjs/toolkit";
 import createUser from "../../types/createUser";
 
 interface initalStateInterface{
+    isValidate: boolean;
     isState: boolean;
     setPassword: string;
     createUserData: createUser;
@@ -10,6 +11,7 @@ interface initalStateInterface{
 
 
 const initialState: initalStateInterface = {
+    isValidate: false,
     isState: false,
     setPassword: '',
     isSetPassword: false,
@@ -30,6 +32,9 @@ export const registrationSlice = createSlice({
     name: 'registration',
     initialState,
     reducers: {
+        validate: (state) => {
+            state.isValidate = true
+        },
         registrate: (state) => {
             state.isState = !state.isState
         },
@@ -45,9 +50,10 @@ export const registrationSlice = createSlice({
     }
 })
 
-export const { registrate, setUserData, setPasswordUpdate, setIsSetPassword } = registrationSlice.actions;
+export const { registrate, setUserData, setPasswordUpdate, setIsSetPassword, validate } = registrationSlice.actions;
 
 export const selectReg = (state: any) => state.registration.isState;
+export const selectValid = (state: any) => state.registration.isValidate;
 export const selectUserData = (state: any) => state.registration.createUserData;
 export const setPassword = (state: any) => state.registration.setPassword;
 export const isSetPassword = (state: any) => state.registration.isSetPassword;
