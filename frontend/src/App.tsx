@@ -18,6 +18,9 @@ import {
  } from 'react-router-dom';
 import NewsPage, { NewsPageLoader } from './pages/NewsPage';
 import Registration from './pages/Registration';
+import { checkAuth } from './components/globalSlices/authSlice';
+import { ThunkDispatch } from 'redux-thunk';
+import { RootState } from './store/store';
 
 function App() {
   const router = createBrowserRouter(
@@ -30,10 +33,16 @@ function App() {
     )
   );
 
-  const dispatch = useDispatch();
+  type AppDispatch = ThunkDispatch<RootState, void, any>;
+  const dispatch: AppDispatch = useDispatch();
   
   useEffect(() => {
     dispatch(resize())
+
+    if(localStorage.getItem('token')){
+      console.log(localStorage.getItem('token'))
+      dispatch(checkAuth())
+    }
   })
 
   window.addEventListener('resize', () => {

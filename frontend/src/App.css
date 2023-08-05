@@ -61,6 +61,6 @@ h1,h2,h3,h4,h5, ul{
   
 
 .text-focus-in{
-	-webkit-animation: text-focus-in 0.7s cubic-bezier(0.550, 0.085, 0.680, 0.530) 0.1s both;
-	        animation: text-focus-in 0.7s cubic-bezier(0.550, 0.085, 0.680, 0.530) 0.1s both;
+	-webkit-animation: text-focus-in 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) 0.1s both;
+	        animation: text-focus-in 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) 0.1s both;
 }

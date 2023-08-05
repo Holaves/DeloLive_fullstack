@@ -4,14 +4,21 @@ import { Col, Row } from 'react-bootstrap';
 import FormInput from './UI/FormInput/FormInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { isSetPassword, validate, selectReg, selectUserData, registrate } from './globalSlices/registrationSlice';
-import axiosRequests from '../classes/axiosRequests';
+import { registration, selectIsAuth, selectIsLoading } from './globalSlices/authSlice';
+import userModel from '../types/UserModel';
+import { ThunkDispatch } from 'redux-thunk';
+import { RootState } from '../store/store';
 
 
 const RegistrationForm = () => {
-    const dispatch = useDispatch()
+    type AppDispatch = ThunkDispatch<RootState, void, any>;
+
+    const dispatch: AppDispatch = useDispatch();
+
     const isReg = useSelector(selectReg)
-    const allData = useSelector(selectUserData)
+    const allData: userModel = useSelector(selectUserData)
     const isCheckPassword = useSelector(isSetPassword)
+    const isAuth = useSelector(selectIsAuth)
 
     const [isChecked1, setIsChecked1] = useState <boolean>(true)
     const [isChecked2, setIsChecked2] = useState <boolean>(true)
@@ -34,8 +41,9 @@ const RegistrationForm = () => {
     }
     const sendALLData = () => {
         if(areAllFieldsFilled(allData) && isCheckPassword){
+            console.log(allData)
             console.log('sendDate')
-            axiosRequests.POSTuser('/api/registration', allData)
+            dispatch(registration(allData));
         }
         else{
             console.log('areAllFieldsFilled - ' + areAllFieldsFilled(allData))
@@ -57,8 +65,11 @@ const RegistrationForm = () => {
     useEffect(() => {
         sendALLData()
     }, [isReg])
+
+
     return (
         <div className='RegistrationForm' style={{marginTop: '73px'}}>
+            <h1>{isAuth ? 'Ауз' : 'Не ауз'}</h1>
             <form className="RegistrationForm__wrapper">
                 <Row>
                     <Col className='align-center-style'>

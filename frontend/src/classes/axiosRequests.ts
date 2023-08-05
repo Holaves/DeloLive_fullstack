@@ -1,5 +1,5 @@
 import axios from "axios"
-import createUser from "../types/createUser";
+import createUser from "../types/UserModel";
 
 interface bodyPost{
     description: string;
@@ -26,7 +26,19 @@ class axiosReq{
             console.log(error);
           });
     }
-    async POSTuser(url: string, body: createUser){
+    async registration(url: string, body: createUser){
+        await axios.post(url, body)
+          .catch(error => {
+            console.log(error);
+          });
+    }
+    async login(url: string, body: createUser){
+        await axios.post(url, body)
+          .catch(error => {
+            console.log(error);
+          });
+    }
+    async logout(url: string, body: createUser){
         await axios.post(url, body)
           .catch(error => {
             console.log(error);

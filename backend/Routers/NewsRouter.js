@@ -1,5 +1,5 @@
 import Router from 'express';
-import NewsController from '../Controllers/NewsController.js';
+import NewsController from '../contollers/news-controller.js';
 
 const router = new Router()
 

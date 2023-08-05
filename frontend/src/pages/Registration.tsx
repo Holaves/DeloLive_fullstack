@@ -12,6 +12,8 @@ const Registration = () => {
         'marginTop': '72px',
         'text-align': 'center'
     }
+
+
     return (
         <div>
             <div className="_container-1">

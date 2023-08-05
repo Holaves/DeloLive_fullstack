@@ -1,16 +1,9 @@
 import { createSlice , PayloadAction} from "@reduxjs/toolkit";
-import createUser from "../../types/createUser";
-
-interface initalStateInterface{
-    isValidate: boolean;
-    isState: boolean;
-    setPassword: string;
-    createUserData: createUser;
-    isSetPassword: boolean;
-}
+import userModel from "../../types/UserModel";
+import IRegistration from "../../types/interfaces/IRegistration";
 
 
-const initialState: initalStateInterface = {
+const initialState: IRegistration = {
     isValidate: false,
     isState: false,
     setPassword: '',
@@ -38,7 +31,7 @@ export const registrationSlice = createSlice({
         registrate: (state) => {
             state.isState = !state.isState
         },
-        setUserData: (state, action: PayloadAction<Partial<createUser>>) => {
+        setUserData: (state, action: PayloadAction<Partial<userModel>>) => {
             state.createUserData = { ...state.createUserData, ...action.payload };
         },
         setPasswordUpdate: (state, action: PayloadAction<Partial<string>>) => {

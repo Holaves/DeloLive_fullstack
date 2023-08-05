@@ -4,9 +4,9 @@ import './FormInput.css'
 import { useDate } from '../../../hooks/useDate'
 import { selectValid, selectUserData, setIsSetPassword, setPassword, setPasswordUpdate, setUserData } from '../../globalSlices/registrationSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { varCreateUser } from '../../../types/createUser';
+import { varUserModel } from '../../../types/UserModel';
 interface FormInputProps{
-    field: varCreateUser;
+    field: varUserModel;
     placeholder: string;
     title: string;
     errorMessage?: string;

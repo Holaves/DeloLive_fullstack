@@ -1,8 +1,13 @@
 import React from 'react';
 import './styles/AboutUs/AboutUs.css'
 import Title from './UI/Title/Title';
+import { selectScroll } from './globalSlices/scroll';
+import { useSelector } from 'react-redux';
 
 const AboutUs = () => {
+
+    const scroll = useSelector(selectScroll)
+
     return (
         <div className='AboutUs'>
             <Title hType="h1">немного о нас</Title>
