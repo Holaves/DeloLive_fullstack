@@ -10,13 +10,14 @@ import AboutUs from '../components/AboutUs';
 import News from '../components/News';
 import SpecialOffers from '../components/SpecialOffers';
 import UsefulButtons from '../components/UsefulButtons';
+import { API_URL } from '../http';
 
 const Main = () => {
     let windowWidth = useSelector(selectWidth)
     const [offersList, setOffersList] = useState <OfferItemType[]>([])
    
     useEffect(() => {
-        axiosRequests.GET<OfferItemType>('/api/offers')
+        axiosRequests.GET<OfferItemType>(`${API_URL}/offers`)
         .then(response => setOffersList(response))
         .catch(e => console.log(e))
     }, [])

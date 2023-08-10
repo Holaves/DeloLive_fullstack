@@ -9,6 +9,7 @@ const UserSchema = new Schema({
     fatherName: {type: String, unique: false, required: false},
     telephone: {type: String, unique: true, required: true},
     birthdate: {type: String, unique: false, required: true},
+    isMailing: {type: Boolean, unique: false, required: true},
     card: {type: String, unique: false, required: true},
 
     isActivated: {type: Boolean, default: false},

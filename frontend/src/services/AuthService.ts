@@ -5,14 +5,14 @@ import userModel from "../types/UserModel";
 
 export default class AuthService {
     static async login(email: string, password: string): Promise<AxiosResponse<AuthResponse>> {
-        return $api.post<AuthResponse>('/login', {email, password})
+        return $api.post<AuthResponse>('/auth/login', {email, password})
     }
     static async registration(registrationData: userModel): Promise<AxiosResponse<AuthResponse>> {
         console.log(registrationData)
-        return $api.post<AuthResponse>('/registration', registrationData)
+        return $api.post<AuthResponse>('/auth/registration', registrationData)
     }
     static async logout(): Promise<void> {
-        return $api.post('/logout')
+        return $api.post('/auth/logout')
     }
 }
 

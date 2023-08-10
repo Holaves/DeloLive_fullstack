@@ -7,6 +7,7 @@ interface IRegistration{
     setPassword: string;
     createUserData: userModel;
     isSetPassword: boolean;
+    sendCounter: number;
 }
 
 export default IRegistration

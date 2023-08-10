@@ -7,6 +7,7 @@ export default class UserDto {
     email;
     birthdate;
     card;
+    isMailing;
     isActivated;
 
     constructor(model){
@@ -15,6 +16,7 @@ export default class UserDto {
         this.name = model.name
         this.telephone = model.telephone
         this.birthdate = model.birthdate
+        this.isMailing = model.isMailing
         this.card = model.card
         this.id = model._id
         this.isActivated = model.isActivated

@@ -1,5 +1,8 @@
 import React from 'react';
 import RegistrationForm from '../components/RegistrationForm';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../components/globalSlices/authSlice';
+import { IUser } from '../types/interfaces/IUser';
 
 const Registration = () => {
 
@@ -12,7 +15,7 @@ const Registration = () => {
         'marginTop': '72px',
         'text-align': 'center'
     }
-
+    const user: IUser = useSelector(selectUser)
 
     return (
         <div>

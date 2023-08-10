@@ -8,6 +8,7 @@ const initialState: IRegistration = {
     isState: false,
     setPassword: '',
     isSetPassword: false,
+    sendCounter: 0,
 
     createUserData: {
         surname: '',
@@ -17,6 +18,7 @@ const initialState: IRegistration = {
         email: '',
         password: '',
         birthdate: '',
+        isMailing: false,
         card: ''
     } 
 };
@@ -39,16 +41,20 @@ export const registrationSlice = createSlice({
         },
         setIsSetPassword: (state, action: PayloadAction<Partial<boolean>>) => {
             state.isSetPassword = action.payload
+        },
+        setSendCounter: (state) => {
+            state.sendCounter += 1
         }
     }
 })
 
-export const { registrate, setUserData, setPasswordUpdate, setIsSetPassword, validate } = registrationSlice.actions;
+export const { registrate, setUserData, setPasswordUpdate, setIsSetPassword, validate, setSendCounter } = registrationSlice.actions;
 
 export const selectReg = (state: any) => state.registration.isState;
 export const selectValid = (state: any) => state.registration.isValidate;
 export const selectUserData = (state: any) => state.registration.createUserData;
 export const setPassword = (state: any) => state.registration.setPassword;
 export const isSetPassword = (state: any) => state.registration.isSetPassword;
+export const selectSendCounter = (state: any) => state.registration.sendCounter
 
 export default registrationSlice.reducer;

@@ -7,13 +7,14 @@ import './styles/News/News.css'
 import Title from './UI/Title/Title';
 import NewsItemType from '../types/NewsItem';
 import axiosRequests from '../classes/axiosRequests';
+import { API_URL } from '../http';
 
 const News = () => {
     const windowWidth = useSelector(selectWidth) as number
     const [NewsList, setNewsList] = useState <NewsItemType[]>([])
 
     useEffect(() => {
-        axiosRequests.GET<NewsItemType>('/api/news')
+        axiosRequests.GET<NewsItemType>(`${API_URL}/news`)
         .then(response => setNewsList(response))
         .catch(e => console.log(e))
     }, [])

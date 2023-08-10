@@ -1,27 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
-import ValidationType from '../../../types/Validation';
 import './FormInput.css'
 import { useDate } from '../../../hooks/useDate'
-import { selectValid, selectUserData, setIsSetPassword, setPassword, setPasswordUpdate, setUserData } from '../../globalSlices/registrationSlice';
+import { selectValid, selectUserData, setIsSetPassword, setPassword, setPasswordUpdate, setUserData, selectSendCounter } from '../../globalSlices/registrationSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { varUserModel } from '../../../types/UserModel';
-interface FormInputProps{
-    field: varUserModel;
-    placeholder: string;
-    title: string;
-    errorMessage?: string;
-    isPassword?: boolean;
-    isInfo?: boolean;
-    isTel?: boolean;
-    checkPassword?: boolean;
-    validation?: ValidationType;
-    date?: boolean;
-    width?: 'normal' | 'small' | 'large';
-    indexOne?: true;
-    inputType?: string;
-}
+import IFormInputProps from '../../../types/interfaces/IFormInputProps';
+import { selectLogin, selectLoginCounter, setLoginData } from '../../globalSlices/loginSlice';
 
-const FormInput: FC<FormInputProps> = ({
+const FormInput: FC<IFormInputProps> = ({
     field,
     placeholder,
     isTel = false,
@@ -35,13 +20,16 @@ const FormInput: FC<FormInputProps> = ({
     },
     isPassword = false,
     isInfo = false,
+    isCard = false,
+    isLogin = false,
     width = 'normal',
     indexOne = false,
     date = false,
     inputType = "text"
 }) => {
     const dispatch = useDispatch()
-    const selectedReg = useSelector(selectValid)
+    const selectedReg = useSelector(selectSendCounter)
+    const selectedLogin = useSelector(selectLoginCounter)
     const userDateRedux = useSelector(selectUserData)
     const checkPasswordDate = useSelector(setPassword)
 
@@ -54,6 +42,7 @@ const FormInput: FC<FormInputProps> = ({
     const [telNum, setTelNum] = useState <string>('+7 (___) ___-__-_')
     const [inputText, setInputText] = useState <string>('')
     const [inputDate, setInputDate] = useState <string>(useDate())
+    const [cardText, setCardText] = useState <string>('')
 
     const [sendTime, setSendTime] = useState <number>(1);
     const [intervalId, setIntervalId] = useState <any>(null);
@@ -77,8 +66,9 @@ const FormInput: FC<FormInputProps> = ({
 
         if(date) currentText = inputDate
         else if(isTel) currentText = telNum
+        else if(isCard) currentText = cardText
         else currentText = inputText
-
+        
         if(field === 'none') return false
         if(validation.minLength <= currentText.length || isTel){
             if(validation.maxLength >= currentText.length || isTel){
@@ -153,15 +143,36 @@ const FormInput: FC<FormInputProps> = ({
             }
         }
         else{
+            if(field === 'fatherName') {
+                setIsError(false)
+                return true
+            }
             createErrorMsg('Минимальное кол-во символов для этого поля - ' + String(validation.minLength))
         }
         return valid
     }
+    const sendLogin = () => {
+        let dataValue = inputText
+        if(inputText.length === 0) {
+            if(field === 'password') {
+                createErrorMsg('Введите пароль')
+            }
+            else {
+                createErrorMsg('Введите почту')
+            }
+        }
+        else {
+            setIsError(false)
+            dispatch(setLoginData({[field]: dataValue}))
+        }
+    }
+
     const sendData = () => {
         let dataValue;
 
         if(date) dataValue = inputDate
         else if(isTel) dataValue = telNum
+        else if(isCard) dataValue = cardText.replace(/\s/g, "");
         else dataValue = inputText
         const valid: boolean = checkValid()
 
@@ -182,6 +193,7 @@ const FormInput: FC<FormInputProps> = ({
         }
 
         if(field !== 'none' && valid){
+            console.log('Отработало')
             dispatch(setUserData({[field]: dataValue}))
         }
     }
@@ -209,6 +221,26 @@ const FormInput: FC<FormInputProps> = ({
     const dateHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         let inputValue: string = e.target.value
         setInputDate(inputValue)
+    }
+    const cardHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let inputValue: string = e.target.value
+        let beforeValue: string = ''
+        let counter = 0
+        
+        inputValue.replace(/\s/g, "").split('').forEach((cv) => {
+
+            if(counter % 4 == 0) {
+                beforeValue = beforeValue + ' ' + cv
+            }
+            else {
+                beforeValue = beforeValue + cv
+            }
+            counter++
+        })
+        beforeValue = beforeValue.trim()
+        if(inputValue.replace(/\s/g, "").length <= 16) {
+            setCardText(beforeValue)
+        }
     }
     const telNumHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         let inputValue: string = e.target.value
@@ -253,6 +285,7 @@ const FormInput: FC<FormInputProps> = ({
     
     const getInputValue = () => {
         if(isTel) return telNum
+        else if(isCard) return cardText
         else if(date) return inputDate
         else return inputText
     }
@@ -281,11 +314,16 @@ const FormInput: FC<FormInputProps> = ({
         getMarginTop()
     }, [])
     useEffect(() => {
-        if(counterSend !== 0){
-            sendData()
+        if(counterSend !== 0) {
+            if(isLogin) {
+                sendLogin()
+            }
+            else {
+                sendData()
+            }
         }
         setCounterSend(1)
-    }, [selectedReg])
+    }, [selectedReg, selectedLogin])
     return (
         <div className='FormInput' style={{marginTop: marginTop}}   >
             <div className="FormInput__title">{title}</div>
@@ -295,7 +333,7 @@ const FormInput: FC<FormInputProps> = ({
                 <input
                 style={{width: inputWidth}}
                 type={getInputType()}
-                onChange={isTel ? telNumHandler : date ? dateHandler : isPassword ? passwordHandler : inputHandler}
+                onChange={isTel ? telNumHandler : date ? dateHandler : isPassword ? passwordHandler : isCard ? cardHandler: inputHandler}
                 value={getInputValue()}
                 autoComplete='new-password'
                 className='FormInput_input'

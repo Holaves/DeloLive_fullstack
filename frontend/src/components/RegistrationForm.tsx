@@ -3,29 +3,34 @@ import './styles/RegistrationForm/RegistrationForm.css'
 import { Col, Row } from 'react-bootstrap';
 import FormInput from './UI/FormInput/FormInput';
 import { useDispatch, useSelector } from 'react-redux';
-import { isSetPassword, validate, selectReg, selectUserData, registrate } from './globalSlices/registrationSlice';
-import { registration, selectIsAuth, selectIsLoading } from './globalSlices/authSlice';
+import { isSetPassword, validate, selectReg, selectUserData, registrate, setSendCounter, setUserData } from './globalSlices/registrationSlice';
+import { registration, selectIsAuth, selectIsLoading, selectIsLoadingForm, selectRegistrationError, setRegistrationError } from './globalSlices/authSlice';
 import userModel from '../types/UserModel';
 import { ThunkDispatch } from 'redux-thunk';
 import { RootState } from '../store/store';
+import Loader from './UI/Loader/Loader';
+import { Link } from 'react-router-dom';
 
 
 const RegistrationForm = () => {
     type AppDispatch = ThunkDispatch<RootState, void, any>;
 
     const dispatch: AppDispatch = useDispatch();
-
+    const errorMessage = useSelector(selectRegistrationError)
     const isReg = useSelector(selectReg)
     const allData: userModel = useSelector(selectUserData)
     const isCheckPassword = useSelector(isSetPassword)
+    const isLoadingForm = useSelector(selectIsLoadingForm)
+    const isLoading = useSelector(selectIsLoading)
     const isAuth = useSelector(selectIsAuth)
 
-    const [isChecked1, setIsChecked1] = useState <boolean>(true)
-    const [isChecked2, setIsChecked2] = useState <boolean>(true)
+    const [isChecked1, setIsChecked1] = useState <boolean>(false)
+    const [isChecked2, setIsChecked2] = useState <boolean>(false)
     const [isSubmitDisabled, setIsSubmitDisabled] = useState <boolean>(false)
 
     const isChecked1Handler = () => {
         isChecked1 ? setIsChecked1(false) : setIsChecked1(true)
+        dispatch(setUserData({['isMailing']: !isChecked1}))
     }
     const isChecked2Handler = () => {
         isChecked2 ? setIsChecked2(false) : setIsChecked2(true)
@@ -33,13 +38,19 @@ const RegistrationForm = () => {
     function areAllFieldsFilled(obj: object) {
         for (var key in obj) {
         // @ts-ignore
-          if (typeof obj[key] !== 'string' || obj[key].trim() === '') {
-            return false;
-          }
+        if(typeof obj[key] !== 'boolean') {
+            // @ts-ignore
+            if (obj[key].trim() === '' || typeof obj[key] !== 'string') {
+                return false;
+            }
+        }
+          
         }
         return true;
     }
     const sendALLData = () => {
+        console.log(allData)
+
         if(areAllFieldsFilled(allData) && isCheckPassword){
             console.log(allData)
             console.log('sendDate')
@@ -51,21 +62,33 @@ const RegistrationForm = () => {
         }
     }
     const isRegSet = () => {
-        console.log('valid')
-        dispatch(validate());
+        if(!isChecked2) {
+            dispatch(setRegistrationError('Для продолжения требуется согласие на обработку данных'))   
+        }
+        else {
+            console.log('valid')
+            dispatch(validate());
+            dispatch(setSendCounter())
 
-        setIsSubmitDisabled(true)
+            setIsSubmitDisabled(true)
 
-        setTimeout(() => {
-            dispatch(registrate())
-            setIsSubmitDisabled(false)
-        }, 3000)
-
+            setTimeout(() => {
+                dispatch(registrate())
+                setIsSubmitDisabled(false)
+            }, 3000)
+        }
     }
     useEffect(() => {
         sendALLData()
     }, [isReg])
 
+    if(isLoading) {
+        return(
+            <div style={{display:'flex', justifyContent: 'center', marginTop: 100}}>
+                <Loader width={100} height={100}></Loader>
+            </div>
+        )
+    }
 
     return (
         <div className='RegistrationForm' style={{marginTop: '73px'}}>
@@ -77,12 +100,12 @@ const RegistrationForm = () => {
                         field='surname'
                         indexOne = {true}
                         placeholder='Иванов'
-                        title='Фамилия'
+                        title='Фамилия*'
                         />
                         <FormInput
                         field='name'
                         placeholder='Иван'
-                        title='Имя'
+                        title='Имя*'
                         />
                         <FormInput
                         field='fatherName'
@@ -95,13 +118,13 @@ const RegistrationForm = () => {
                         indexOne = {true}
                         placeholder=''
                         field='telephone'
-                        title='Телефон'
+                        title='Телефон*'
                         isTel={true}
                         />
                         <FormInput
                         field='email'
                         placeholder='mail@example.ru'
-                        title='E-mail'
+                        title='E-mail*'
                         validation={{
                             minLength: 6,
                             maxLength: 100,
@@ -111,7 +134,7 @@ const RegistrationForm = () => {
                         <FormInput
                         field='password'
                         placeholder='Придумайте пароль'
-                        title='Пароль'
+                        title='Пароль*'
                         isPassword={true}
                         validation={{
                             password: true,
@@ -124,7 +147,7 @@ const RegistrationForm = () => {
                         inputType='password'
                         placeholder='Повторите пароль'
                         checkPassword = {true}
-                        title='Подтверждение пароля'
+                        title='Подтверждение пароля*'
                         validation={{
                             minLength: 5,
                             maxLength: 50
@@ -138,7 +161,7 @@ const RegistrationForm = () => {
                         <FormInput
                         field='birthdate'
                         placeholder='ДД.ММ.ГГГГ'
-                        title='Дата рождения'
+                        title='Дата рождения*'
                         errorMessage='Введите дату рождения'
                         width={'small'}
                         date={true}
@@ -150,34 +173,48 @@ const RegistrationForm = () => {
                         />
                         <FormInput
                         field='card'
-                        placeholder='123456'
-                        title='Номер карты клиента'
+                        isCard={true}
+                        placeholder='1111 1111 1111 1111'
+                        title='Номер карты клиента*'
                         isInfo={true}
                         width={'small'}
                         />
                     </Col>
                 </Row>
-                <div className="submitForm-container">
-                    <div className="submitForm">
-                        <div className="smsSystem">
-                            <h6>Подписка на рассылку</h6>
-                            <input type='checkbox' name='sms' checked={isChecked1}/>
-                            <label htmlFor="sms" onClick={isChecked1Handler}></label>
+                {
+                    !isLoadingForm ?
+                        <div className="submitForm-container">
+                            <div className="submitForm">
+                                <div className="smsSystem">
+                                    <h6>Подписка на рассылку</h6>
+                                    <input type='checkbox' name='sms' checked={isChecked1}/>
+                                    <label htmlFor="sms" onClick={isChecked1Handler}></label>
+                                </div>
+                                <div className="personalDate">
+                                    <h5>Согласие на обработку перональных данных </h5>
+                                    <input type='checkbox' name='data' checked={isChecked2}/>    
+                                    <label htmlFor="sms" onClick={isChecked2Handler}></label>
+                                </div>
+                                {errorMessage ? <h4 className="Error-message">{errorMessage}</h4> : ''}
+                                <input
+                                type="submit"
+                                disabled={isSubmitDisabled}
+                                className='submitButton'
+                                value="Зарегестрироваться"
+                                onClick={isRegSet}
+                                />
+                                <Link className="loginLink" to='/login' >
+                                    Войти
+                                </Link>
+                            </div>
+                            
                         </div>
-                        <div className="personalDate">
-                            <h5>Согласие на обработку перональных данных </h5>
-                            <input type='checkbox' name='data' checked={isChecked2}/>    
-                            <label htmlFor="sms" onClick={isChecked2Handler}></label>
-                        </div>
-                        <input
-                        type="submit"
-                        disabled={isSubmitDisabled}
-                        className='submitButton'
-                        value="Зарегестрироваться"
-                        onClick={isRegSet}
-                        />
+                    :
+                    <div style={{display:'flex', justifyContent: 'center', marginTop: 50}}>
+                        <Loader width={60} height={60}></Loader>
                     </div>
-                </div>
+                }
+                
             </form>
         </div>
     );

@@ -1,0 +1,87 @@
+$textColor: #0D1C41;
+$bgParams: no-repeat center center / cover;
+
+.LoginReasons{
+    max-width: 400px;
+    width: 100%;
+}
+
+.LoginReasons__head {   
+    font-family: SF Pro Display;
+    font-size: 18px;
+    font-style: normal;
+    display: flex;
+    justify-content: center;
+    font-weight: 400;
+    line-height: normal;
+    white-space: pre;
+    color: $textColor;
+    position: relative;
+    &::before {
+        content: '5';
+        text-align: center;
+        font-family: SF Pro Display;
+        font-size: 124px;
+        font-style: normal;
+        font-weight: 100;
+        color: $textColor;
+        position: absolute;
+        left: 37%;
+        top: -75px;
+    }
+}
+
+.reasons{
+    &__reason-item {
+        margin-top: 35px;
+        &:first-child{
+            margin-top: 64px;
+        }
+        display: flex;
+        align-items: center;
+        &__text {
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            text-transform: uppercase;
+            margin-left: 46px;
+            color: $textColor;
+        }
+        
+    }
+}
+.icon-container{
+    width: 60px;
+    display: flex;
+    justify-content: center;
+}
+
+.reasons__reason-item__icon {
+    height: 60px;
+}
+
+#icon1{
+    width: 60px;
+    position: relative;
+    right: 3px;
+    background: url('../../../assets/images/Login-images/time.svg') $bgParams;
+}
+#icon2{
+    width: 48px;
+    background: url('../../../assets/images/Login-images/guard.svg') $bgParams;
+}
+#icon3{
+    width: 55px;
+    position: relative;
+    right: 6px;
+    background: url('../../../assets/images/Login-images/hand.svg') $bgParams;
+}
+#icon4{
+    width: 48px;
+    background: url('../../../assets/images/Login-images/search.svg') $bgParams;
+}
+#icon5{
+    width: 54px;
+    background: url('../../../assets/images/Login-images/fingerScan.svg') no-repeat center center / cover;
+}

@@ -7,6 +7,9 @@ import './Navbar.css'
 import axiosRequests from '../../../classes/axiosRequests';
 import Loader from '../Loader/Loader';
 import HelpItem from '../../../types/HelpItem';
+import { API_URL } from '../../../http';
+import { useSelector } from 'react-redux';
+import { selectIsAuth } from '../../globalSlices/authSlice';
 
 const Navbar = () => {
     type nameDropdown = "" | "city" | "help"
@@ -17,6 +20,8 @@ const Navbar = () => {
         area?: string;
         region?: string
     }
+
+    const isAuth = useSelector(selectIsAuth)
 
     const [citiesValue, setCitiesValue] = useState <string>("")
 
@@ -41,8 +46,10 @@ const Navbar = () => {
         setIsHoverDropdown(isName)
     }
     const getCities = (need: need) => {
-        axiosRequests.GET<cityType>(`/api/cities?q=${citiesValue}&need=${need}`)
+        console.log('send cities now')
+        axiosRequests.GET<cityType>(`${API_URL}/cities?q=${citiesValue}&need=${need}`)
         .then(response => setCities(response))
+        .then(response => console.log(response))
         .catch(e => console.log(e))
     }
     const changeCitiesHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,7 +79,7 @@ const Navbar = () => {
             getCities(0)
             setFirstCounter(firstCounter + 1)
 
-            axiosRequests.GET<HelpItem>(`/api/helps`)
+            axiosRequests.GET<HelpItem>(`${API_URL}/helps`)
             .then(response => setHelps(response))
             .catch(e => console.log(e))
         }
@@ -158,7 +165,7 @@ const Navbar = () => {
                     <h3 className="Telephone">+7 495 967 13 01</h3>
 
                 </div>
-                <Link className="Personal-nav" to='/registration'>
+                <Link className="Personal-nav" to={ isAuth ? '/registration' : '/account'}>
                     <h5>Личный кабинет</h5>
                     <div className="Personal-nav__icon"></div>
                 </Link>

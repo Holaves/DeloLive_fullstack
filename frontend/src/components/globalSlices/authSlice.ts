@@ -10,7 +10,11 @@ import { API_URL } from "../../http";
 const initialState: IAuth = {
     user: {} as IUser,
     isAuth: false,
-    isLoading: false
+    isLoading: false,
+    isEmailSend: false,
+    isLoadingForm: false,
+    registrationError: '',
+    loginError: ''
 };
 
 export const authSlice = createSlice({
@@ -25,40 +29,63 @@ export const authSlice = createSlice({
         },
         setIsLoading(state, action: PayloadAction<boolean>) {
             state.isLoading = action.payload
+        },
+        setIsLoadingForm(state, action: PayloadAction<boolean>) {
+            state.isLoadingForm = action.payload
+        },
+        setIsEmailSend(state, action: PayloadAction<boolean>) {
+            state.isEmailSend = action.payload
+        },
+        setRegistrationError(state, action: PayloadAction<string>) {
+            state.registrationError = action.payload
+        },
+        setLoginError(state, action: PayloadAction<string>) {
+            state.loginError = action.payload
         }
-    }
+     }
 })
 
-export const { setAuth, setUser, setIsLoading } = authSlice.actions;
-
-export const selectAuthValue = (state: any) => state.auth.selectAuthValue;
+export const { setAuth, setUser, setIsLoading, setIsLoadingForm, setIsEmailSend, setRegistrationError, setLoginError } = authSlice.actions;
 
 export const login = (email: string, password: string) => async (dispatch: any) => {
-
+    dispatch(setIsLoadingForm(true))
     try {
         const response = await AuthService.login(email, password);
         console.log(response);
+        if(response.status === 200) {
+            dispatch(setLoginError(''))
+        }
         localStorage.setItem("token", response.data.accessToken);
 
         dispatch(setAuth(true));
         dispatch(setUser(response.data.user));
     } catch (e: any) {
+        dispatch(setLoginError(e.response?.data?.message))
         console.log(e.response?.data?.message);
+    } finally {
+        dispatch(setIsLoadingForm(false))
     }
 
 }
 
 export const registration = (registrationData: userModel) => async (dispatch: any) => {
-
+    dispatch(setIsLoadingForm(true))
     try {
         const response = await AuthService.registration(registrationData);
         console.log(response);
+        if(response.status === 200) {
+            dispatch(setIsEmailSend(true))
+            dispatch(setRegistrationError(''))
+        }
         localStorage.setItem("token", response.data.accessToken);
 
         dispatch(setAuth(true));
         dispatch(setUser(response.data.user));
     } catch (e: any) {
         console.log(e.response?.data?.message);
+        dispatch(setRegistrationError(e.response?.data?.message))
+    } finally {
+        dispatch(setIsLoadingForm(false))
     }
     
 }
@@ -81,7 +108,7 @@ export const logout = () => async (dispatch: any) => {
 export const checkAuth = () => async (dispatch: any) => {
     dispatch(setIsLoading(true));
     try {
-        const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {
+        const response = await axios.get<AuthResponse>(`${API_URL}/auth/refresh`, {
             withCredentials: true,
         });
         console.log(response);
@@ -97,7 +124,11 @@ export const checkAuth = () => async (dispatch: any) => {
 }
 
 export const selectIsLoading = (state: any) => state.auth.isLoading;
+export const selectIsLoadingForm = (state: any) => state.auth.isLoadingForm;
 export const selectIsAuth = (state: any) => state.auth.isAuth;
 export const selectUser = (state: any) => state.auth.user;
+export const selectRegistrationError = (state: any) => state.auth.registrationError;
+export const selectLoginError = (state: any) => state.auth.loginError;
+export const selectIsEmailSend = (state: any) => state.auth.isEmailSend;
 
 export default authSlice.reducer;

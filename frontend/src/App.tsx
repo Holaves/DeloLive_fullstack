@@ -21,6 +21,8 @@ import Registration from './pages/Registration';
 import { checkAuth } from './components/globalSlices/authSlice';
 import { ThunkDispatch } from 'redux-thunk';
 import { RootState } from './store/store';
+import AccountPage from './pages/AccountPage';
+import Login from './pages/Login';
 
 function App() {
   const router = createBrowserRouter(
@@ -29,12 +31,15 @@ function App() {
         <Route index element={<Main/>} />
         <Route path='/news' element={<NewsPage/>} loader={NewsPageLoader} />
         <Route path='/registration' element={<Registration/>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/account' element={<AccountPage/>}/>
       </Route>
     )
   );
 
   type AppDispatch = ThunkDispatch<RootState, void, any>;
   const dispatch: AppDispatch = useDispatch();
+
   
   useEffect(() => {
     dispatch(resize())

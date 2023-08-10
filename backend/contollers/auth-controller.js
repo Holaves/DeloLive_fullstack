@@ -1,18 +1,18 @@
 import AuthService from "../services/auth-service.js"
 
 class AuthController {
-    async registration(req, res) {
+    async registration(req, res, next) {
         try {
-            const {email, password, name, surname, fatherName, telephone, birthdate, card} = req.body
-            const userData = await AuthService.registration(email, password, name, surname, fatherName, telephone, birthdate, card)
+            const {email, password, name, surname, fatherName, telephone, birthdate, card, isMailing} = req.body
+            const userData = await AuthService.registration(email, password, name, surname, fatherName, telephone, birthdate, card, isMailing)
             res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
             return res.json(userData)
         } catch (e) {
             console.log('Ошибка!')
-            console.log(e)
+            next(e)
         }
     }
-    async login(req, res) {
+    async login(req, res, next) {
         try {
             const {email, password} = req.body
             const userData = await AuthService.login(email, password)
@@ -20,10 +20,10 @@ class AuthController {
             res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
             return res.json(userData)
         } catch (e) {
-            console.log(e)
+            next(e)
         }
     }
-    async logout(req, res) {
+    async logout(req, res, next) {
         try {
             const {refreshToken} = req.cookies
             const token = await AuthService.logout(refreshToken)
@@ -31,20 +31,20 @@ class AuthController {
             res.clearCookie('refreshToken')
             return res.json(token)
         } catch (e) {
-            console.log(e)
+            next(e)
         }
     }
-    async activate(req, res) {
+    async activate(req, res, next) {
         try {
             const activationLink = req.params.link;
             await AuthService.activate(activationLink)
 
             return res.redirect(process.env.CLIENT_URL)
         } catch (e) {
-            console.log(e)
+            next(e)
         }
     }
-    async refresh(req, res) {
+    async refresh(req, res, next) {
         try {
             const {refreshToken} = req.cookies
             const userData = await AuthService.refresh(refreshToken)
@@ -52,15 +52,15 @@ class AuthController {
             return res.json(userData)
 
         } catch (e) {
-            console.log(e)
+            next(e)
         }
     }
-    async getUsers(req, res) {
+    async getUsers(req, res, next) {
         try {
             const users = await AuthService.getAllUsers();
             return res.json(users);
         } catch (e) {
-            console.log(e)
+            next(e)
         }
     }
 }
