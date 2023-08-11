@@ -1,15 +1,9 @@
 import React, { FC } from 'react';
 import LoginReasons from '../components/LoginReasons';
 import LoginForm from '../components/LoginForm';
+import login_container_Styles from '../components/styles/customStyles/loginContainer';
 
 const Login = () => {
-    const login_container_Styles = {
-        'display': 'flex',
-        'marginTop' : '65px',
-        'justifyContent': 'space-around'
-
-    }
-
     return (
         <div>
             <div className='_container-1'>

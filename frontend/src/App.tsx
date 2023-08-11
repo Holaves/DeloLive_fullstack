@@ -23,6 +23,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { RootState } from './store/store';
 import AccountPage from './pages/AccountPage';
 import Login from './pages/Login';
+import MailActivate from './pages/MailActivate';
 
 function App() {
   const router = createBrowserRouter(
@@ -33,6 +34,7 @@ function App() {
         <Route path='/registration' element={<Registration/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/account' element={<AccountPage/>}/>
+        <Route path='/registration/activate' element={<MailActivate/>}/>
       </Route>
     )
   );

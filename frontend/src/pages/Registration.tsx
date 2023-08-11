@@ -3,18 +3,9 @@ import RegistrationForm from '../components/RegistrationForm';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../components/globalSlices/authSlice';
 import { IUser } from '../types/interfaces/IUser';
+import h3Styles from '../components/styles/customStyles/h3Styles';
 
 const Registration = () => {
-
-    const h3Styles = {
-        'fontFamily': 'SF Pro Display',
-        'fontWeight': 400,
-        'fontSize': '30px',
-        'lineHeight': '36px',
-        'color': '#0D1C41',
-        'marginTop': '72px',
-        'text-align': 'center'
-    }
     const user: IUser = useSelector(selectUser)
 
     return (
@@ -22,7 +13,6 @@ const Registration = () => {
             <div className="_container-1">
                 <h3 style={h3Styles}>Регистрация</h3>
                 <RegistrationForm/>
-                
             </div>
         </div>
     );

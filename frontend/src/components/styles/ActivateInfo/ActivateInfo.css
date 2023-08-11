@@ -1,0 +1,46 @@
+.ActivateInfo {
+  max-width: 910px;
+  width: 100%;
+  border: 1px solid #0D1C41;
+  border-radius: 15px;
+  margin: 0px auto;
+  margin-top: 70px;
+}
+.ActivateInfo__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 56px 40px 56px;
+}
+@media (max-width: 370px) {
+  .ActivateInfo__wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.logo {
+  background: url(../../../assets/images/UI-images/Navbar-images/Logo.svg) no-repeat center center/cover;
+  width: 52px;
+  height: 58px;
+}
+@media (max-width: 370px) {
+  .logo {
+    margin-top: 5px;
+  }
+}
+
+.info {
+  color: #0D1C41;
+  font-family: SF Pro Display;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 150%;
+  max-width: 520px;
+  width: 100%;
+}
+@media (max-width: 370px) {
+  .info {
+    font-size: 14px;
+  }
+}/*# sourceMappingURL=ActivateInfo.css.map */

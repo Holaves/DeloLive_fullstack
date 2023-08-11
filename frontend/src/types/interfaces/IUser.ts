@@ -6,6 +6,7 @@ export interface IUser {
     telephone: string;
     email: string;
     birthdate: string;
+    isMailing: boolean;
     card: string;
     isActivated: boolean;
 }

@@ -165,7 +165,7 @@ const Navbar = () => {
                     <h3 className="Telephone">+7 495 967 13 01</h3>
 
                 </div>
-                <Link className="Personal-nav" to={ isAuth ? '/registration' : '/account'}>
+                <Link className="Personal-nav" to={ !isAuth ? '/registration' : '/account'}>
                     <h5>Личный кабинет</h5>
                     <div className="Personal-nav__icon"></div>
                 </Link>

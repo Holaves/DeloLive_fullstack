@@ -4,26 +4,29 @@ import { Col, Row } from 'react-bootstrap';
 import FormInput from './UI/FormInput/FormInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { isSetPassword, validate, selectReg, selectUserData, registrate, setSendCounter, setUserData } from './globalSlices/registrationSlice';
-import { registration, selectIsAuth, selectIsLoading, selectIsLoadingForm, selectRegistrationError, setRegistrationError } from './globalSlices/authSlice';
+import { registration, selectIsAuth, selectIsEmailSend, selectIsLoading, selectIsLoadingForm, selectRegistrationError, setRegistrationError } from './globalSlices/authSlice';
 import userModel from '../types/UserModel';
 import { ThunkDispatch } from 'redux-thunk';
 import { RootState } from '../store/store';
 import Loader from './UI/Loader/Loader';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const RegistrationForm = () => {
     type AppDispatch = ThunkDispatch<RootState, void, any>;
 
     const dispatch: AppDispatch = useDispatch();
+    const navigate = useNavigate();
     const errorMessage = useSelector(selectRegistrationError)
     const isReg = useSelector(selectReg)
+    const isMail = useSelector(selectIsEmailSend)
     const allData: userModel = useSelector(selectUserData)
     const isCheckPassword = useSelector(isSetPassword)
     const isLoadingForm = useSelector(selectIsLoadingForm)
     const isLoading = useSelector(selectIsLoading)
     const isAuth = useSelector(selectIsAuth)
 
+    const [redirectCounter, setRedirectCounter] = useState <number>(0)
     const [isChecked1, setIsChecked1] = useState <boolean>(false)
     const [isChecked2, setIsChecked2] = useState <boolean>(false)
     const [isSubmitDisabled, setIsSubmitDisabled] = useState <boolean>(false)
@@ -82,6 +85,13 @@ const RegistrationForm = () => {
         sendALLData()
     }, [isReg])
 
+    useEffect(() => {
+        if(redirectCounter !== 0) {
+            navigate('/registration/activate');
+        }
+        setRedirectCounter(1)
+    },[isMail])
+
     if(isLoading) {
         return(
             <div style={{display:'flex', justifyContent: 'center', marginTop: 100}}>
@@ -92,7 +102,7 @@ const RegistrationForm = () => {
 
     return (
         <div className='RegistrationForm' style={{marginTop: '73px'}}>
-            <h1>{isAuth ? 'Ауз' : 'Не ауз'}</h1>
+            <h1 onClick={() => navigate('/registration/activate')}>{isAuth ? 'Ауз' : 'Не ауз'}</h1>
             <form className="RegistrationForm__wrapper">
                 <Row>
                     <Col className='align-center-style'>
